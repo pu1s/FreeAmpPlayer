@@ -5,12 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FreeAmp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Style="{DynamicResource MyWindowStyle}">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="350" Width="525" Style="{DynamicResource MyWindowStyle}" WindowStyle="None">
+    <Grid/>
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+        <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
 
         <Color x:Key="WindowBackgroundColor">#FF2D2D30</Color>
         <Color x:Key="HighlightColor">#FF3F3F41</Color>
@@ -57,7 +55,7 @@
 
         <Style x:Key="MyWindowStyle" TargetType="local:MainWindow">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}" />
-            <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>
+            <Setter Property="Background" Value="{StaticResource WindowBackgroundColorBrush}"/>
             <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
             <Setter Property="UseLayoutRounding" Value="True" />
             <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
@@ -120,7 +118,7 @@
                                         </Grid>
                                     </AdornerDecorator>
                                 </Border>
-                                <Border BorderBrush="{StaticResource BlueColorBrush}" BorderThickness="1" Visibility="{Binding IsActive, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource bool2VisibilityConverter}}" />
+                                <Border BorderBrush="{StaticResource BlueColorBrush}" BorderThickness="1" Visibility="{Binding IsActive, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource Bool2VisibilityConverter}}" />
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
