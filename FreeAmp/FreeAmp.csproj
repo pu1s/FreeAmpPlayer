@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D5099993-72C6-4896-88BE-778AD00EB652}</ProjectGuid>
+    <ProjectGuid>{165B9263-FF7D-4B03-A5BB-ADF94C6A96B5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FreeAmp</RootNamespace>
