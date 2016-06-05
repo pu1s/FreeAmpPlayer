@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FreeAmp"
+        xmlns:style="clr-namespace:FreeAmp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Style="{DynamicResource MyWindowStyle}" WindowStyle="None">
+        Title="MainWindow" Height="350" Width="525" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None">
     <Grid/>
     <Window.Resources>
+        <!--  Begin resource  --><!--
         <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
 
         <Color x:Key="WindowBackgroundColor">#FF2D2D30</Color>
@@ -20,7 +22,7 @@
         <SolidColorBrush x:Key="BlueColorBrush" Color="{StaticResource BlueColor}"/>
         <SolidColorBrush x:Key="ForegroundColorBrush" Color="{StaticResource ForegroundColor}"/>
 
-        <Style x:Key="WindowButtonStyle" TargetType="{x:Type Button}">
+        <Style x:Key="WindowButtonStyle"  TargetType="{x:Type Button}">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -53,7 +55,7 @@
             </Setter>
         </Style>
 
-        <Style x:Key="MyWindowStyle" TargetType="local:MainWindow">
+        <Style x:Key="MyWindowStyle" x:Name="MyWindowStyle" TargetType="local:MainWindow">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}" />
             <Setter Property="Background" Value="{StaticResource WindowBackgroundColorBrush}"/>
             <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
@@ -75,6 +77,14 @@
                                             <ContentPresenter Grid.Row="1" Grid.RowSpan="2" Margin="7"/>
                                             <Rectangle x:Name="HeaderBackground" Height="25" Fill="{DynamicResource WindowBackgroundColorBrush}" VerticalAlignment="Top" Grid.Row="0"/>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True" Grid.Row="0">
+                                                <Button Command="{Binding Source={x:Static SystemCommands.ShowSystemMenuCommand}}" ToolTip="SysMenu"  Style="{StaticResource WindowButtonStyle}">
+                                                    <Button.Content>
+                                                        <Grid Width="30" Height="25" RenderTransform="1,0,0,1,0,1">
+                                                            <Path Data="M0,6 L8,6 Z" Width="8" Height="7" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                        Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="2"  />
+                                                        </Grid>
+                                                    </Button.Content>
+                                                </Button>
                                                 <Button Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}" ToolTip="minimize" Style="{StaticResource WindowButtonStyle}">
                                                     <Button.Content>
                                                         <Grid Width="30" Height="25" RenderTransform="1,0,0,1,0,1">
@@ -84,7 +94,7 @@
                                                     </Button.Content>
                                                 </Button>
                                                 <Grid Margin="1,0,1,0">
-                                                    <Button x:Name="Restore" Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}" ToolTip="restore" Visibility="Collapsed" Style="{StaticResource WindowButtonStyle}">
+                                                    <Button x:Name="Restore" Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}" ToolTip="Restore" Visibility="Collapsed" Style="{StaticResource WindowButtonStyle}">
                                                         <Button.Content>
                                                             <Grid Width="30" Height="25" UseLayoutRounding="True" RenderTransform="1,0,0,1,.5,.5">
                                                                 <Path Data="M2,0 L8,0 L8,6 M0,3 L6,3 M0,2 L6,2 L6,8 L0,8 Z" Width="8" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -92,7 +102,7 @@
                                                             </Grid>
                                                         </Button.Content>
                                                     </Button>
-                                                    <Button x:Name="Maximize" Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}" ToolTip="maximize" Style="{StaticResource WindowButtonStyle}">
+                                                    <Button x:Name="Maximize" Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}" ToolTip="Maximize" Style="{StaticResource WindowButtonStyle}">
                                                         <Button.Content>
                                                             <Grid Width="31" Height="25">
                                                                 <Path Data="M0,1 L9,1 L9,8 L0,8 Z" Width="9" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -101,7 +111,7 @@
                                                         </Button.Content>
                                                     </Button>
                                                 </Grid>
-                                                <Button Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}" ToolTip="close"  Style="{StaticResource WindowButtonStyle}">
+                                                <Button Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}" ToolTip="Close"  Style="{StaticResource WindowButtonStyle}">
                                                     <Button.Content>
                                                         <Grid Width="30" Height="25" RenderTransform="1,0,0,1,0,1">
                                                             <Path Data="M0,0 L8,7 M8,0 L0,7 Z" Width="8" Height="7" VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -147,6 +157,6 @@
                     <WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" />
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
     </Window.Resources>
 </Window>
