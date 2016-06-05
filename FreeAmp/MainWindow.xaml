@@ -3,17 +3,128 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FreeAmp"
+        xmlns:local="clr-namespace:FreeAmp" xmlns:InstanceBuilders="clr-namespace:Microsoft.VisualStudio.DesignTools.WpfDesigner.InstanceBuilders;assembly=Microsoft.VisualStudio.DesignTools.WpfDesigner" x:Name="MWin"
         x:Class="FreeAmp.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowStyle="None">
+        Title="MainWindow" Height="350" Width="525" WindowStyle="None" Template="{DynamicResource WindowControlTemplate1}">
     <Window.Resources>
 
+        <ControlTemplate x:Key="WindowControlTemplate1" TargetType="{x:Type Window}">
+            <ControlTemplate.Resources>
+                <Style x:Key="emptyStyle" TargetType="{x:Type FrameworkElement}"/>
+            </ControlTemplate.Resources>
+            <Grid x:Name="grid" Uid="Grid_1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.Style>
+                    <Style TargetType="{x:Type FrameworkElement}"/>
+                </Grid.Style>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="InstanceBuilders:WindowInstance.WindowStyle" Value="None">
+                    <Setter Property="Visibility" TargetName="caption" Value="Collapsed"/>
+                </Trigger>
+                <Trigger Property="InstanceBuilders:WindowInstance.WindowStyle" Value="ToolWindow">
+                    <Setter Property="Visibility" TargetName="icon" Value="Collapsed"/>
+                    <Setter Property="Height" TargetName="caption" Value="{DynamicResource {x:Static SystemParameters.SmallCaptionHeightKey}}"/>
+                    <Setter Property="FontFamily" TargetName="titleText" Value="{DynamicResource {x:Static SystemFonts.SmallCaptionFontFamilyKey}}"/>
+                    <Setter Property="FontSize" TargetName="titleText" Value="{DynamicResource {x:Static SystemFonts.SmallCaptionFontSizeKey}}"/>
+                    <Setter Property="FontStyle" TargetName="titleText" Value="{DynamicResource {x:Static SystemFonts.SmallCaptionFontStyleKey}}"/>
+                    <Setter Property="TextDecorations" TargetName="titleText" Value="{DynamicResource {x:Static SystemFonts.SmallCaptionFontTextDecorationsKey}}"/>
+                    <Setter Property="FontWeight" TargetName="titleText" Value="{DynamicResource {x:Static SystemFonts.SmallCaptionFontWeightKey}}"/>
+                    <Setter Property="Visibility" TargetName="maximizeButton" Value="Collapsed"/>
+                    <Setter Property="Visibility" TargetName="minimizeButton" Value="Collapsed"/>
+                </Trigger>
+                <Trigger Property="InstanceBuilders:WindowInstance.ResizeMode" Value="NoResize">
+                    <Setter Property="Visibility" TargetName="maximizeButton" Value="Collapsed"/>
+                    <Setter Property="Visibility" TargetName="minimizeButton" Value="Collapsed"/>
+                    <Setter Property="Height" TargetName="topResizeFrame" Value="3"/>
+                    <Setter Property="Width" TargetName="leftResizeFrame" Value="3"/>
+                    <Setter Property="Width" TargetName="rightResizeFrame" Value="3"/>
+                    <Setter Property="Height" TargetName="bottomResizeFrame" Value="3"/>
+                </Trigger>
+                <Trigger Property="InstanceBuilders:WindowInstance.ResizeMode" Value="CanMinimize">
+                    <Setter Property="Height" TargetName="topResizeFrame" Value="3"/>
+                    <Setter Property="Width" TargetName="leftResizeFrame" Value="3"/>
+                    <Setter Property="Width" TargetName="rightResizeFrame" Value="3"/>
+                    <Setter Property="Height" TargetName="bottomResizeFrame" Value="3"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="InstanceBuilders:WindowInstance.WindowStyle" Value="None"/>
+                        <Condition Property="AllowsTransparency" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Visibility" TargetName="topResizeFrame" Value="Collapsed"/>
+                    <Setter Property="Visibility" TargetName="leftResizeFrame" Value="Collapsed"/>
+                    <Setter Property="Visibility" TargetName="rightResizeFrame" Value="Collapsed"/>
+                    <Setter Property="Visibility" TargetName="bottomResizeFrame" Value="Collapsed"/>
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="InstanceBuilders:WindowInstance.WindowStyle" Value="None"/>
+                        <Condition Property="InstanceBuilders:WindowInstance.ResizeMode" Value="NoResize"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Visibility" TargetName="topResizeFrame" Value="Collapsed"/>
+                    <Setter Property="Visibility" TargetName="leftResizeFrame" Value="Collapsed"/>
+                    <Setter Property="Visibility" TargetName="rightResizeFrame" Value="Collapsed"/>
+                    <Setter Property="Visibility" TargetName="bottomResizeFrame" Value="Collapsed"/>
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="InstanceBuilders:WindowInstance.WindowStyle" Value="None"/>
+                        <Condition Property="InstanceBuilders:WindowInstance.ResizeMode" Value="CanMinimize"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Visibility" TargetName="topResizeFrame" Value="Collapsed"/>
+                    <Setter Property="Visibility" TargetName="leftResizeFrame" Value="Collapsed"/>
+                    <Setter Property="Visibility" TargetName="rightResizeFrame" Value="Collapsed"/>
+                    <Setter Property="Visibility" TargetName="bottomResizeFrame" Value="Collapsed"/>
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Width" Value="Auto"/>
+                        <Condition Property="SizeToContent" Value="Manual"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Width" TargetName="grid" Value="768"/>
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Width" Value="Auto"/>
+                        <Condition Property="SizeToContent" Value="Height"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Width" TargetName="grid" Value="768"/>
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Height" Value="Auto"/>
+                        <Condition Property="SizeToContent" Value="Manual"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Height" TargetName="grid" Value="535"/>
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Height" Value="Auto"/>
+                        <Condition Property="SizeToContent" Value="Width"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Height" TargetName="grid" Value="535"/>
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
     </Window.Resources>
-    <Grid Margin="0">
+    <Grid Margin="1" HorizontalAlignment="Left" Width="514" Height="339" VerticalAlignment="Top">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <local:CaptionWindowUserComponent VerticalAlignment="Top" Width="Auto" Margin="0,-5,0,0"/>
     </Grid>
 </Window>
