@@ -31,6 +31,15 @@ namespace FreeAmp
                 null));
 
         }
+
+        public static readonly DependencyProperty ShowMenuItemProperty = DependencyProperty.Register(
+            "ShowMenuItem", typeof (bool), typeof (MainWindow), new PropertyMetadata(default(bool)));
+
+        public bool ShowMenuItem
+        {
+            get { return (bool) GetValue(ShowMenuItemProperty); }
+            set { SetValue(ShowMenuItemProperty, value); }
+        }
         private void OnSystemMenuShow(object target, ExecutedRoutedEventArgs e)
         {
             SystemCommands.ShowSystemMenu(this, new Point(10,10));
