@@ -32,6 +32,4 @@ namespace FreeAmp.Core
     public class AudioPlayback
     {
     }
-    
-    
 }
