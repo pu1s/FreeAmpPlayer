@@ -27,6 +27,7 @@ namespace FreeAmp.Core
             if(dev.Count == 0) throw new ArgumentNullException("devices");
             devices.AddRange(dev.ToArray());
         }
+
     }
 
     
