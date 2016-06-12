@@ -23,9 +23,7 @@ namespace FreeAmp
             this.CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, this.OnRestoreWindow, this.OnCanResizeWindow));
             this.CommandBindings.Add(new CommandBinding(SystemCommands.ShowSystemMenuCommand, this.OnSystemMenuShow,
                 null));
-            CoreAudio coreAudio = new CoreAudio();
-           
-           
+          
 
         }
 
