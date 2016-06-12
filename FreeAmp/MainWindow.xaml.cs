@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
+using FreeAmp.Core;
+using NAudio.CoreAudioApi;
 
 
 namespace FreeAmp
@@ -20,7 +23,10 @@ namespace FreeAmp
             this.CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, this.OnRestoreWindow, this.OnCanResizeWindow));
             this.CommandBindings.Add(new CommandBinding(SystemCommands.ShowSystemMenuCommand, this.OnSystemMenuShow,
                 null));
-       
+            CoreAudio coreAudio = new CoreAudio();
+           
+           
+
         }
 
         public static readonly DependencyProperty ShowMenuItemProperty = DependencyProperty.Register(
