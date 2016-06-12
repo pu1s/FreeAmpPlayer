@@ -32,8 +32,7 @@ namespace FreeAmp.Core
     public class AudioPlayback
     {
     }
-
-    [Serializable]
+    
     public class Playlist
     {
         public Playlist()
