@@ -88,7 +88,9 @@ namespace FreeAmp.Core
             set
             {
                 if (value >= Tracks.Count) throw new ArgumentOutOfRangeException();
+                if (_curPos == value) return;
                 _curPos = value;
+                OnChangeCurPosition(_curPos);
             }
         }
 
@@ -347,6 +349,13 @@ namespace FreeAmp.Core
             {
                 Tracks.RemoveAt(index);
             }
+        }
+
+        public event EventHandler ChangeCurPosition;
+
+        protected virtual void OnChangeCurPosition(uint pos)
+        {
+            ChangeCurPosition?.Invoke(this, new ChangePosEventArgs(pos));
         }
 
     }

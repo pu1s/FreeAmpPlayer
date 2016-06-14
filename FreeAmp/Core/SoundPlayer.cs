@@ -65,7 +65,9 @@ namespace FreeAmp.Core
         /// </summary>
         private void Shuttle()
         {
-           
+            if (TrackList.IsEmpty) return;
+            var rnd = new Random(TrackList.Count);
+            TrackList.CurPos = (uint)rnd.Next(0, TrackList.Count);
         }
     }
 }
