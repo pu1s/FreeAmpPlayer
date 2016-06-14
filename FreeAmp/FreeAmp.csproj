@@ -111,7 +111,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\CoreAudio.cs" />
-    <Compile Include="Core\Playlist.cs" />
+    <Compile Include="Core\TrackList.cs" />
     <Compile Include="Core\Track.cs" />
     <Compile Include="Core\TrackListException.cs" />
     <Compile Include="UIComponents\CommandButton.xaml.cs">

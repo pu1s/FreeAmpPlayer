@@ -6,7 +6,9 @@ namespace FreeAmp.Core
     public class TrackList
     {
         private static bool _isEmpty;
+
         public static readonly TrackList Empty = EmptyTrackList();
+
         private uint curPos;
 
         static TrackList()
@@ -30,7 +32,9 @@ namespace FreeAmp.Core
         }
 
         public string Name { get; set; }
+
         public List<Track> Tracks { get; }
+
         public int Count => Tracks.Count;
 
         public uint CurPos
@@ -140,7 +144,6 @@ namespace FreeAmp.Core
             Tracks.RemoveAt(beforepos);
             //TODO реализация метода удаления не выполнена
             InsertTrack(track, lastpos);
-            track = null;
         }
       
     }
