@@ -4,8 +4,12 @@ using System.Collections.Generic;
 
 namespace FreeAmp.Core
 {
-    public abstract class Player
+    public interface IPlayer
     {
+        void Play();
+        void Pause();
+        void Resume();
+        void Stop();
     }
 
     /// <summary>
