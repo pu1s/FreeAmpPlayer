@@ -162,14 +162,7 @@ namespace FreeAmp.Core
                 throw new TrackListException("Список воспроизведения достиг конечной точки!",
                     new Dictionary<int, string>(1) {{1, Tracks.Count.ToString()}});
             }
-            if (IsShuffle)
-            {
-                Shuffle();
-            }
-            else
-            {
-                CurPos++;
-            }
+            CurPos++;
         }
 
         /// <summary>
@@ -187,14 +180,7 @@ namespace FreeAmp.Core
                 throw new TrackListException("Список воспроизведения достиг конечной точки!",
                     new Dictionary<int, string>(1) {{1, Tracks.Count.ToString()}});
             }
-            if (IsShuffle)
-            {
-                Shuffle();
-            }
-            else
-            {
-                CurPos--;
-            }
+            CurPos--;
         }
 
         /// <summary>
@@ -363,28 +349,5 @@ namespace FreeAmp.Core
             }
         }
 
-        /// <summary>
-        /// Возвращает и задает случайный выбор трека
-        /// </summary>
-        public bool IsShuffle { get; set; }
-
-        /// <summary>
-        /// Возвращает и задает алгоритм повтора треков
-        /// </summary>
-        public RepeatMode IsRepeat { get; set; }
-
-        /// <summary>
-        /// Вычисляет псевдослучайное число
-        /// </summary>
-        private void Shuffle()
-        {
-            if (IsEmpty)
-            {
-                throw new TrackListException("Список воспроизведения пуст!",
-                    new Dictionary<int, string>(1) {{1, Tracks.Count.ToString()}});
-            }
-            var rnd = new Random(Count);
-            _curPos = (uint) rnd.Next(0, Count);
-        }
     }
 }
