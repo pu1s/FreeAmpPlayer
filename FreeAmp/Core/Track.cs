@@ -3,7 +3,7 @@
     /// <summary>
     ///     Представляет имя и путь к файлу композиции
     /// </summary>
-    public class Track
+    public class Track 
     {
         /// <summary>
         ///     Конструктор по умолчанию
