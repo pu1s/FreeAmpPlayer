@@ -95,12 +95,12 @@ namespace FreeAmp.Core
             if (IsEmpty)
             {
                 throw new TrackListException("Список воспроизведения пуст!",
-                    new Dictionary<int, string>(1) { { 1, Tracks.Count.ToString() } });
+                    new Dictionary<int, string>(1) {{1, Tracks.Count.ToString()}});
             }
             if (CurPos == 0)
             {
                 throw new TrackListException("Список воспроизведения достиг конечной точки!",
-                    new Dictionary<int, string>(1) { { 1, Tracks.Count.ToString() } });
+                    new Dictionary<int, string>(1) {{1, Tracks.Count.ToString()}});
             }
             curPos--;
         }
@@ -128,9 +128,9 @@ namespace FreeAmp.Core
             if (IsEmpty)
             {
                 throw new TrackListException("Список воспроизведения пуст!",
-                   new Dictionary<int, string>(1) { { 1, Tracks.Count.ToString() } });
+                    new Dictionary<int, string>(1) {{1, Tracks.Count.ToString()}});
             }
-            
+
             if (beforepos < 0 && beforepos >= Tracks.Count)
             {
                 throw new TrackListException("Неверно указана начальная позиция!");
@@ -145,6 +145,5 @@ namespace FreeAmp.Core
             //TODO реализация метода удаления не выполнена
             InsertTrack(track, lastpos);
         }
-      
     }
 }
