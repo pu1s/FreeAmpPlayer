@@ -4,14 +4,6 @@ using System.Collections.Generic;
 
 namespace FreeAmp.Core
 {
-    public interface IPlayer
-    {
-        void Play();
-        void Pause();
-        void Resume();
-        void Stop();
-    }
-
     /// <summary>
     /// Список треков
     /// </summary>
@@ -170,7 +162,14 @@ namespace FreeAmp.Core
                 throw new TrackListException("Список воспроизведения достиг конечной точки!",
                     new Dictionary<int, string>(1) {{1, Tracks.Count.ToString()}});
             }
-            _curPos++;
+            if (IsShuffle)
+            {
+                Shuffle();
+            }
+            else
+            {
+                CurPos++;
+            }
         }
 
         /// <summary>
@@ -188,7 +187,14 @@ namespace FreeAmp.Core
                 throw new TrackListException("Список воспроизведения достиг конечной точки!",
                     new Dictionary<int, string>(1) {{1, Tracks.Count.ToString()}});
             }
-            _curPos--;
+            if (IsShuffle)
+            {
+                Shuffle();
+            }
+            else
+            {
+                CurPos--;
+            }
         }
 
         /// <summary>
