@@ -351,7 +351,7 @@ namespace FreeAmp.Core
             }
         }
 
-        public event EventHandler ChangeCurPosition;
+        public event EventHandler<ChangePosEventArgs> ChangeCurPosition;
 
         protected virtual void OnChangeCurPosition(uint pos)
         {

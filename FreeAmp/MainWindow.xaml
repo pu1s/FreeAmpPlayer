@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FreeAmp"
         xmlns:style="clr-namespace:FreeAmp"
+        xmlns:core="clr-namespace:FreeAmp.Core"
         mc:Ignorable="d"
-        Title="FreeAmp" Height="400" Width="600" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None">
-    <Grid x:Name="MainGrid">
+        Title="FreeAmp" Height="400" Width="600" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None" >
+    <Grid x:Name="MainGrid" Background="#FF6E6E6E">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition/>

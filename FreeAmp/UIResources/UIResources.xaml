@@ -75,7 +75,7 @@
         </Setter>
     </Style>
     <!--Стиль окна-->
-    <Style x:Key="DarkWindowStyle" TargetType="freeAmp:MainWindow">
+    <Style x:Key="DarkWindowStyle" TargetType="{x:Type Window}">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}" />
         <Setter Property="Background" Value="{StaticResource WindowBackgroundColorBrush}"/>
         <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
@@ -86,7 +86,7 @@
                 <ControlTemplate TargetType="freeAmp:MainWindow">
                     <Border x:Name="WindowBorder" Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}" Background="{StaticResource WindowBackgroundColorBrush}">
                         <Grid>
-                            <Border BorderThickness="1">
+                            <Border BorderThickness="0">
                                 <AdornerDecorator>
                                     <Grid x:Name="LayoutRoot">
                                         <Grid.RowDefinitions>
@@ -94,7 +94,7 @@
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="15" />
                                         </Grid.RowDefinitions>
-                                        <ContentPresenter Grid.Row="1" Grid.RowSpan="2" Margin="7"/>
+                                        <ContentPresenter Grid.Row="1" Grid.RowSpan="2" Margin="1"/>
                                         <Rectangle x:Name="HeaderBackground" Height="25" Fill="{DynamicResource WindowBackgroundColorBrush}" VerticalAlignment="Top" Grid.Row="0"/>
                                         <StackPanel x:Name="CaptionPanel" Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center"  WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Label Content="FreeAmp" Style="{StaticResource WindowCaptionStyle}">
@@ -197,7 +197,7 @@
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="Restore" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="LayoutRoot" Property="Margin" Value="7" />
+                            <Setter TargetName="LayoutRoot" Property="Margin" Value="1" />
                         </Trigger>
                         <Trigger Property="WindowState" Value="Normal">
                             <Setter TargetName="Maximize" Property="Visibility" Value="Visible" />
