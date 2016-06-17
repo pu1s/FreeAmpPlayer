@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
 namespace FreeAmp.Core
 {
     /// <summary>
-    /// Список треков
+    ///     Список треков
     /// </summary>
     public class TrackList
     {
         /// <summary>
-        /// статическое поле, показывающее заполнение треклиста
+        ///     статическое поле, показывающее заполнение треклиста
         /// </summary>
         private static bool _isEmpty;
 
         /// <summary>
-        /// Состояние листа (пустой лист)
+        ///     Состояние листа (пустой лист)
         /// </summary>
         public static readonly TrackList Empty = EmptyTrackList();
 
         /// <summary>
-        /// указатель на текущий трек
+        ///     указатель на текущий трек
         /// </summary>
         private uint _curPos;
 
         /// <summary>
-        /// Статический конструктор
+        ///     Статический конструктор
         /// </summary>
         static TrackList()
         {
@@ -33,7 +32,7 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Приватный конструктор
+        ///     Приватный конструктор
         /// </summary>
         private TrackList()
         {
@@ -41,10 +40,10 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Конструктор с указанием имени трек листа
+        ///     Конструктор с указанием имени трек листа
         /// </summary>
         /// <param name="name">
-        /// Имя
+        ///     Имя
         /// </param>
         public TrackList(string name) : this()
         {
@@ -52,7 +51,7 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Возвращает состояние заполненности трек листа
+        ///     Возвращает состояние заполненности трек листа
         /// </summary>
         public bool IsEmpty
         {
@@ -65,22 +64,22 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Возвращает и присваивает имя трек листа
+        ///     Возвращает и присваивает имя трек листа
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Список треков
+        ///     Список треков
         /// </summary>
         public List<Track> Tracks { get; }
 
         /// <summary>
-        /// Количество элементов списка треков
+        ///     Количество элементов списка треков
         /// </summary>
         public int Count => Tracks.Count;
 
         /// <summary>
-        /// Возвращает указатель на текущий трек
+        ///     Возвращает указатель на текущий трек
         /// </summary>
         public uint CurPos
         {
@@ -95,13 +94,13 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Перечислитель коллекции
+        ///     Перечислитель коллекции
         /// </summary>
         /// <param name="index">
-        /// Индекс
+        ///     Индекс
         /// </param>
         /// <returns>
-        /// Трек
+        ///     Трек
         /// </returns>
         public Track this[int index]
         {
@@ -116,10 +115,10 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Статическая функция, реализующая "обнуление списка"
+        ///     Статическая функция, реализующая "обнуление списка"
         /// </summary>
         /// <returns>
-        /// <see cref="TrackList"/>
+        ///     <see cref="TrackList" />
         /// </returns>
         private static TrackList EmptyTrackList()
         {
@@ -128,10 +127,10 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Добавляет трек <see cref="Track"/>в конец списка
+        ///     Добавляет трек <see cref="Track" />в конец списка
         /// </summary>
         /// <param name="track">
-        /// Трек
+        ///     Трек
         /// </param>
         public void AppendTrack(Track track)
         {
@@ -139,10 +138,10 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Добавляет массив треков <see cref="Track"/>в конец списка
+        ///     Добавляет массив треков <see cref="Track" />в конец списка
         /// </summary>
         /// <param name="tracks">
-        /// Массив треков <see cref="Track"/>
+        ///     Массив треков <see cref="Track" />
         /// </param>
         public void AppendTracks(Track[] tracks)
         {
@@ -150,7 +149,18 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Перемещает указатель трека <see cref="Track"/> на одну позицию вперед
+        ///     Добавляет коллекцию треков <see cref="Track" /> в конец списка
+        /// </summary>
+        /// <param name="tracks">
+        ///     Коллекция треков <see cref="Track" />
+        /// </param>
+        public void AppendTracks(IEnumerable<Track> tracks)
+        {
+            Tracks.AddRange(tracks);
+        }
+
+        /// <summary>
+        ///     Перемещает указатель трека <see cref="Track" /> на одну позицию вперед
         /// </summary>
         public void NextTrack()
         {
@@ -168,7 +178,7 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Перемещает указатель трека <see cref="Track"/> на одну позицию назад
+        ///     Перемещает указатель трека <see cref="Track" /> на одну позицию назад
         /// </summary>
         public void PreviewTrack()
         {
@@ -186,13 +196,13 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Добаляет трек в указанное место в списке <see cref="TrackList"/>
+        ///     Добаляет трек в указанное место в списке <see cref="TrackList" />
         /// </summary>
         /// <param name="track">
-        /// Трек <see cref="Track"/>
+        ///     Трек <see cref="Track" />
         /// </param>
         /// <param name="pos">
-        /// Позиция, в которую осуществляется добавление
+        ///     Позиция, в которую осуществляется добавление
         /// </param>
         public void InsertTrack(Track track, int pos)
         {
@@ -204,13 +214,13 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Добаляет треки в указанное место в списке <see cref="TrackList"/>
+        ///     Добаляет треки в указанное место в списке <see cref="TrackList" />
         /// </summary>
         /// <param name="tracks">
-        /// Массив треков <see cref="Track"/>
+        ///     Массив треков <see cref="Track" />
         /// </param>
         /// <param name="pos">
-        /// Позиция, в которую осуществляется добавление
+        ///     Позиция, в которую осуществляется добавление
         /// </param>
         public void InsertTracks(Track[] tracks, int pos)
         {
@@ -222,13 +232,31 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Перемещает трек из одной позиции на другую
+        ///     Добаляет треки в указанное место в списке <see cref="TrackList" />
+        /// </summary>
+        /// <param name="tracks">
+        ///     Коллекция треков <see cref="Track" />
+        /// </param>
+        /// <param name="pos">
+        ///     Позиция, в которую осуществляется добавление
+        /// </param>
+        public void InsertTracks(IEnumerable<Track> tracks, int pos)
+        {
+            if (pos < 0 && pos > Tracks.Count)
+            {
+                throw new TrackListException("Невозможно вставит указанный трек в указанную позицию");
+            }
+            Tracks.InsertRange(pos, tracks);
+        }
+
+        /// <summary>
+        ///     Перемещает трек из одной позиции на другую
         /// </summary>
         /// <param name="beforepos">
-        /// Нальная позиция
+        ///     Нальная позиция
         /// </param>
         /// <param name="lastpos">
-        /// Конечная позиция
+        ///     Конечная позиция
         /// </param>
         public void MovieTrack(int beforepos, int lastpos)
         {
@@ -249,15 +277,14 @@ namespace FreeAmp.Core
             if (beforepos == lastpos) return;
             var track = Tracks[beforepos];
             Tracks.RemoveAt(beforepos);
-            //TODO реализация метода удаления не выполнена
             InsertTrack(track, lastpos);
         }
 
         /// <summary>
-        /// Возвращает текущий трек <see cref="Track"/> из списка <see cref="Tracks"/>
+        ///     Возвращает текущий трек <see cref="Track" /> из списка <see cref="Tracks" />
         /// </summary>
         /// <returns>
-        /// Трек <see cref="Track"/>
+        ///     Трек <see cref="Track" />
         /// </returns>
         public Track GetCurrentTrack()
         {
@@ -270,10 +297,10 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Возвращает следующий трек <see cref="Track"/> из списка <see cref="Tracks"/>
+        ///     Возвращает следующий трек <see cref="Track" /> из списка <see cref="Tracks" />
         /// </summary>
         /// <returns>
-        /// Трек <see cref="Track"/>
+        ///     Трек <see cref="Track" />
         /// </returns>
         public Track GetPreviewTrack()
         {
@@ -286,10 +313,10 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Возвращает следующий трек <see cref="Track"/> из списка <see cref="Tracks"/>
+        ///     Возвращает следующий трек <see cref="Track" /> из списка <see cref="Tracks" />
         /// </summary>
         /// <returns>
-        /// Трек <see cref="Track"/>
+        ///     Трек <see cref="Track" />
         /// </returns>
         public Track GetNextTrack()
         {
@@ -306,7 +333,7 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Очищает текущий трек лист <see cref="TrackList"/>
+        ///     Очищает текущий трек лист <see cref="TrackList" />
         /// </summary>
         public void ClearTrackList()
         {
@@ -314,10 +341,10 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Удаляет трек <see cref="Track"/> из треклиста <see cref="Tracks"/>
+        ///     Удаляет трек <see cref="Track" /> из треклиста <see cref="Tracks" />
         /// </summary>
         /// <param name="track">
-        /// Трек <see cref="Track"/>
+        ///     Трек <see cref="Track" />
         /// </param>
         public void RemoveTrack(Track track)
         {
@@ -333,10 +360,10 @@ namespace FreeAmp.Core
         }
 
         /// <summary>
-        /// Удаляет трек <see cref="Track"/> из треклиста <see cref="Tracks"/> по указанному индексу
+        ///     Удаляет трек <see cref="Track" /> из треклиста <see cref="Tracks" /> по указанному индексу
         /// </summary>
         /// <param name="index">
-        /// Индекс
+        ///     Индекс
         /// </param>
         public void RemoveTrackAt(int index)
         {
@@ -357,6 +384,5 @@ namespace FreeAmp.Core
         {
             ChangeCurPosition?.Invoke(this, new ChangePosEventArgs(pos));
         }
-
     }
 }
