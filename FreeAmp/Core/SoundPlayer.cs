@@ -1,50 +1,60 @@
 using System;
-using NAudio.Wave;
 
 namespace FreeAmp.Core
 {
     public class SoundPlayer : IPlayer
     {
+        #region Fields
+
+        private TrackList _trackList;
+
+        #endregion
+
         #region Main Func
 
-        private NAudio.Wave.IWavePlayer OutDevice { get; set; }
-
-        public SoundPlayer SetOutDevice(IWavePlayer outDevice)
-        {
-            OutDevice = outDevice;
-            return this;
-        }
-        
+        /// <summary>
+        ///     Начинает проигрывание
+        /// </summary>
         public void Play()
-        { 
-            AudioFileReader reader;
-           reader =
-               new AudioFileReader(TrackList.GetCurrentTrack().Name);
-            OutDevice.Init(reader);
-            OutDevice.Play();
-            IsPlaying = true;
+        {
+            throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///     Приостанавливает проигрывание
+        /// </summary>
         public void Pause()
         {
-            OutDevice.Pause();
+            throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///     Возобновляет проигрывание
+        /// </summary>
         public void Resume()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///     Останавливает проигрывание
+        /// </summary>
         public void Stop()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///     Осуществляет переход к следующему треку в плей листе
+        /// </summary>
         public void Next()
         {
-           TrackList.NextTrack();
+            throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///     Осуществляет переход к предидущему треку в плей листе
+        /// </summary>
         public void Preview()
         {
             throw new NotImplementedException();
@@ -57,23 +67,39 @@ namespace FreeAmp.Core
         public event EventHandler Playing;
         public event EventHandler Paused;
         public event EventHandler Stoped;
+        public event EventHandler<TrackListLadedEventArgs> TrackListLoaded;
 
         #endregion
 
         #region Property
-
         public bool IsSuttle { get; set; }
 
-        public TrackList TrackList { get; set; }
+        public TrackList TrackList
+        {
+            get
+            {
+                return _trackList.IsEmpty ? null : _trackList;
+            }
+            set
+            {
+                if (value != null)
+                    _trackList = value;
+                OnTrackListLoaded(new TrackListLadedEventArgs(_trackList));
+            }
+        }
 
         /// <summary>
         /// Возвращает и задает алгоритм повтора треков
         /// </summary>
         public RepeatMode IsRepeat { get; set; }
-
+        /// <summary>
+        /// Возвращает и задает состояния проигрывания в настоящий момент
+        /// </summary>
         public bool IsPlaying { get; set; }
 
         #endregion
+
+        #region Outher Func
 
         /// <summary>
         /// Вычисляет псевдослучайное число
@@ -84,13 +110,17 @@ namespace FreeAmp.Core
             var rnd = new Random(TrackList.Count);
             TrackList.CurPos = (uint) rnd.Next(0, TrackList.Count);
         }
-    }
 
-    public enum AudioFileFormat
-    {
-        wav,
-        mp3,
-        mp2,
-        mp4
-    };
+        #endregion
+
+        #region Event Invocators
+
+        protected virtual void OnTrackListLoaded(TrackListLadedEventArgs e)
+        {
+            TrackListLoaded?.Invoke(this, e);
+        }
+
+        #endregion
+
+    }
 }

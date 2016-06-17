@@ -110,7 +110,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Core\ChangePosEventArgs.cs" />
+    <Compile Include="Core\ChangePositionInTrackListEventArgs.cs" />
     <Compile Include="Core\CoreAudio.cs" />
     <Compile Include="Core\FreeAmpAudioPlayer.cs" />
     <Compile Include="Core\IPlayer.cs" />
@@ -119,6 +119,7 @@
     <Compile Include="Core\TrackList.cs" />
     <Compile Include="Core\Track.cs" />
     <Compile Include="Core\TrackListException.cs" />
+    <Compile Include="Core\TrackListLadedEventArgs.cs" />
     <Compile Include="UIComponents\CommandButton.xaml.cs">
       <DependentUpon>CommandButton.xaml</DependentUpon>
     </Compile>
