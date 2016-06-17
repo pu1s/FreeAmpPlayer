@@ -1,4 +1,5 @@
 using System;
+using NAudio.Wave;
 
 namespace FreeAmp.Core
 {
@@ -6,14 +7,27 @@ namespace FreeAmp.Core
     {
         #region Main Func
 
-        public void Play()
+        private NAudio.Wave.IWavePlayer OutDevice { get; set; }
+
+        public SoundPlayer SetOutDevice(IWavePlayer outDevice)
         {
-            throw new NotImplementedException();
+            OutDevice = outDevice;
+            return this;
+        }
+        
+        public void Play()
+        { 
+            AudioFileReader reader;
+           reader =
+               new AudioFileReader(TrackList.GetCurrentTrack().Name);
+            OutDevice.Init(reader);
+            OutDevice.Play();
+            IsPlaying = true;
         }
 
         public void Pause()
         {
-            throw new NotImplementedException();
+            OutDevice.Pause();
         }
 
         public void Resume()
@@ -28,7 +42,7 @@ namespace FreeAmp.Core
 
         public void Next()
         {
-            throw new NotImplementedException();
+           TrackList.NextTrack();
         }
 
         public void Preview()
@@ -47,10 +61,11 @@ namespace FreeAmp.Core
         #endregion
 
         #region Property
+
         public bool IsSuttle { get; set; }
 
         public TrackList TrackList { get; set; }
-        
+
         /// <summary>
         /// Возвращает и задает алгоритм повтора треков
         /// </summary>
@@ -67,7 +82,15 @@ namespace FreeAmp.Core
         {
             if (TrackList.IsEmpty) return;
             var rnd = new Random(TrackList.Count);
-            TrackList.CurPos = (uint)rnd.Next(0, TrackList.Count);
+            TrackList.CurPos = (uint) rnd.Next(0, TrackList.Count);
         }
     }
+
+    public enum AudioFileFormat
+    {
+        wav,
+        mp3,
+        mp2,
+        mp4
+    };
 }

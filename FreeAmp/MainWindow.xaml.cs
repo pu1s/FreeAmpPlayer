@@ -13,7 +13,7 @@ namespace FreeAmp
     /// </summary>
     public partial class MainWindow : Window
     {
-       
+       private SoundPlayer sp;
        public MainWindow()
         {
             InitializeComponent();
@@ -23,12 +23,17 @@ namespace FreeAmp
             this.CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, this.OnRestoreWindow, this.OnCanResizeWindow));
             this.CommandBindings.Add(new CommandBinding(SystemCommands.ShowSystemMenuCommand, this.OnSystemMenuShow,
                 null));
-          
+            sp = new SoundPlayer();
+            sp.SetOutDevice(new NAudio.Wave.WaveOut());
+            sp.TrackList = new TrackList("");
+            sp.TrackList.AppendTrack(new Track(@"D:\Music\Savage - Greatest Hits & Remixes (2 CD) (2016)\CD2\07-Radio (Maxi Version).mp3"));
+            sp.TrackList.AppendTrack(new Track(@"D:\Music\Океан Ельзи - Без меж (2016)\02. Не йди.mp3"));
+                       
 
         }
 
         public static readonly DependencyProperty ShowMenuItemProperty = DependencyProperty.Register(
-            "ShowMenuItem", typeof (bool), typeof (MainWindow), new PropertyMetadata(default(bool)));
+            "));ShowMenuItem", typeof (bool), typeof (MainWindow), new PropertyMetadata(default(bool)));
 
         public bool ShowMenuItem
         {
@@ -68,6 +73,13 @@ namespace FreeAmp
         {
             SystemCommands.RestoreWindow(this);
            
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            if (sp.IsPlaying) sp.Pause();
+            sp.Next();
+            sp.Play();
         }
     }
 
