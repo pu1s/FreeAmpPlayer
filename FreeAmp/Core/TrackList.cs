@@ -421,11 +421,11 @@ namespace FreeAmp.Core
             }
         }
 
-        public event EventHandler<ChangePosEventArgs> ChangeCurPosition;
+        public event EventHandler<ChangePositionInTrackListEventArgs> ChangeCurPosition;
 
         protected virtual void OnChangeCurPosition(uint pos)
         {
-            ChangeCurPosition?.Invoke(this, new ChangePosEventArgs(pos));
+            ChangeCurPosition?.Invoke(this, new ChangePositionInTrackListEventArgs(pos));
         }
     }
 }

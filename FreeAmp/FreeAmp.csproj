@@ -110,7 +110,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Core\ChangePosEventArgs.cs" />
+    <Compile Include="Core\ChangePositionInTrackListEventArgs.cs" />
     <Compile Include="Core\CoreAudio.cs" />
     <Compile Include="Core\IPlayer.cs" />
     <Compile Include="Core\RepeatMode.cs" />

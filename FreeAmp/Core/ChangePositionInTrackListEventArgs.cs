@@ -2,13 +2,13 @@ using System;
 
 namespace FreeAmp.Core
 {
-    public class ChangePosEventArgs : EventArgs
+    public class ChangePositionInTrackListEventArgs : EventArgs
     {
         private uint _curPos;
 
         public uint CurPos => _curPos;
 
-        public ChangePosEventArgs(uint pos)
+        public ChangePositionInTrackListEventArgs(uint pos)
         {
             _curPos = pos;
         }
