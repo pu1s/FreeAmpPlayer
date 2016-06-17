@@ -162,6 +162,9 @@ namespace FreeAmp.Core
         /// <summary>
         ///     Перемещает указатель трека <see cref="Track" /> на одну позицию вперед
         /// </summary>
+        /// <exception cref="TrackListException">
+        ///     Исключение, возникающее при ошибке в трек листе <see cref="TrackList" />
+        /// </exception>
         public void NextTrack()
         {
             if (IsEmpty)
@@ -180,6 +183,10 @@ namespace FreeAmp.Core
         /// <summary>
         ///     Перемещает указатель трека <see cref="Track" /> на одну позицию назад
         /// </summary>
+        /// ///
+        /// <exception cref="TrackListException">
+        ///     Исключение, возникающее при ошибке в трек листе <see cref="TrackList" />
+        /// </exception>
         public void PreviewTrack()
         {
             if (IsEmpty)
@@ -204,6 +211,10 @@ namespace FreeAmp.Core
         /// <param name="pos">
         ///     Позиция, в которую осуществляется добавление
         /// </param>
+        /// ///
+        /// <exception cref="TrackListException">
+        ///     Исключение, возникающее при ошибке в трек листе <see cref="TrackList" />
+        /// </exception>
         public void InsertTrack(Track track, int pos)
         {
             if (pos < 0 && pos > Tracks.Count)
@@ -222,6 +233,10 @@ namespace FreeAmp.Core
         /// <param name="pos">
         ///     Позиция, в которую осуществляется добавление
         /// </param>
+        /// ///
+        /// <exception cref="TrackListException">
+        ///     Исключение, возникающее при ошибке в трек листе <see cref="TrackList" />
+        /// </exception>
         public void InsertTracks(Track[] tracks, int pos)
         {
             if (pos < 0 && pos > Tracks.Count)
@@ -240,6 +255,10 @@ namespace FreeAmp.Core
         /// <param name="pos">
         ///     Позиция, в которую осуществляется добавление
         /// </param>
+        /// ///
+        /// <exception cref="TrackListException">
+        ///     Исключение, возникающее при ошибке в трек листе <see cref="TrackList" />
+        /// </exception>
         public void InsertTracks(IEnumerable<Track> tracks, int pos)
         {
             if (pos < 0 && pos > Tracks.Count)
@@ -258,6 +277,10 @@ namespace FreeAmp.Core
         /// <param name="lastpos">
         ///     Конечная позиция
         /// </param>
+        /// ///
+        /// <exception cref="TrackListException">
+        ///     Исключение, возникающее при ошибке в трек листе <see cref="TrackList" />
+        /// </exception>
         public void MovieTrack(int beforepos, int lastpos)
         {
             if (IsEmpty)
@@ -286,6 +309,10 @@ namespace FreeAmp.Core
         /// <returns>
         ///     Трек <see cref="Track" />
         /// </returns>
+        /// ///
+        /// <exception cref="TrackListException">
+        ///     Исключение, возникающее при ошибке в трек листе <see cref="TrackList" />
+        /// </exception>
         public Track GetCurrentTrack()
         {
             if (IsEmpty)
@@ -302,6 +329,10 @@ namespace FreeAmp.Core
         /// <returns>
         ///     Трек <see cref="Track" />
         /// </returns>
+        /// ///
+        /// <exception cref="TrackListException">
+        ///     Исключение, возникающее при ошибке в трек листе <see cref="TrackList" />
+        /// </exception>
         public Track GetPreviewTrack()
         {
             if (IsEmpty)
@@ -318,6 +349,10 @@ namespace FreeAmp.Core
         /// <returns>
         ///     Трек <see cref="Track" />
         /// </returns>
+        /// ///
+        /// <exception cref="TrackListException">
+        ///     Исключение, возникающее при ошибке в трек листе <see cref="TrackList" />
+        /// </exception>
         public Track GetNextTrack()
         {
             if (IsEmpty)
@@ -346,6 +381,10 @@ namespace FreeAmp.Core
         /// <param name="track">
         ///     Трек <see cref="Track" />
         /// </param>
+        /// ///
+        /// <exception cref="TrackListException">
+        ///     Исключение, возникающее при ошибке в трек листе <see cref="TrackList" />
+        /// </exception>
         public void RemoveTrack(Track track)
         {
             if (IsEmpty)
@@ -365,6 +404,10 @@ namespace FreeAmp.Core
         /// <param name="index">
         ///     Индекс
         /// </param>
+        /// ///
+        /// <exception cref="TrackListException">
+        ///     Исключение, возникающее при ошибке в трек листе <see cref="TrackList" />
+        /// </exception>
         public void RemoveTrackAt(int index)
         {
             if (IsEmpty)

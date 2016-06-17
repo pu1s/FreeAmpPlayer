@@ -118,6 +118,7 @@
     <Compile Include="Core\TrackList.cs" />
     <Compile Include="Core\Track.cs" />
     <Compile Include="Core\TrackListException.cs" />
+    <Compile Include="Core\TrackListLadedEventArgs.cs" />
     <Compile Include="UIComponents\CommandButton.xaml.cs">
       <DependentUpon>CommandButton.xaml</DependentUpon>
     </Compile>
