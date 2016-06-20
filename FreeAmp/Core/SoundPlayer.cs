@@ -1,4 +1,5 @@
 using System;
+using NAudio.Wave;
 
 namespace FreeAmp.Core
 {
@@ -12,12 +13,14 @@ namespace FreeAmp.Core
 
         #region Main Func
 
-        /// <summary>
-        ///     Начинает проигрывание
-        /// </summary>
         public void Play()
-        {
-            throw new NotImplementedException();
+        { 
+            AudioFileReader reader;
+           reader =
+               new AudioFileReader(TrackList.GetCurrentTrack().Name);
+            OutDevice.Init(reader);
+            OutDevice.Play();
+            IsPlaying = true;
         }
 
         /// <summary>
@@ -25,7 +28,7 @@ namespace FreeAmp.Core
         /// </summary>
         public void Pause()
         {
-            throw new NotImplementedException();
+            OutDevice.Pause();
         }
 
         /// <summary>
@@ -49,7 +52,7 @@ namespace FreeAmp.Core
         /// </summary>
         public void Next()
         {
-            throw new NotImplementedException();
+           TrackList.NextTrack();
         }
 
         /// <summary>
@@ -72,22 +75,11 @@ namespace FreeAmp.Core
         #endregion
 
         #region Property
+
         public bool IsSuttle { get; set; }
 
-        public TrackList TrackList
-        {
-            get
-            {
-                return _trackList.IsEmpty ? null : _trackList;
-            }
-            set
-            {
-                if (value != null)
-                    _trackList = value;
-                OnTrackListLoaded(new TrackListLadedEventArgs(_trackList));
-            }
-        }
-
+        public TrackList TrackList { get; set; }
+        
         /// <summary>
         /// Возвращает и задает алгоритм повтора треков
         /// </summary>
@@ -108,19 +100,18 @@ namespace FreeAmp.Core
         {
             if (TrackList.IsEmpty) return;
             var rnd = new Random(TrackList.Count);
-            TrackList.CurPos = (uint) rnd.Next(0, TrackList.Count);
-        }
-
-        #endregion
-
-        #region Event Invocators
-
-        protected virtual void OnTrackListLoaded(TrackListLadedEventArgs e)
-        {
-            TrackListLoaded?.Invoke(this, e);
+            TrackList.CurPos = (uint)rnd.Next(0, TrackList.Count);
         }
 
         #endregion
 
     }
+
+    public enum AudioFileFormat
+    {
+        wav,
+        mp3,
+        mp2,
+        mp4
+    };
 }
