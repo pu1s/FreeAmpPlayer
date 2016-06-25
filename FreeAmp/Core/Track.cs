@@ -1,32 +1,75 @@
-﻿namespace FreeAmp.Core
+﻿using System;
+using System.IO;
+
+namespace FreeAmp.Core
 {
     /// <summary>
     ///     Представляет имя и путь к файлу композиции
     /// </summary>
     public class Track 
     {
+        private string _path;
+        private TrackInfo _trackInfo;
+
         /// <summary>
         ///     Конструктор по умолчанию
         /// </summary>
         public Track()
         {
-            Name = string.Empty;
+            _path = string.Empty;
+            _trackInfo = null;
         }
 
         /// <summary>
         ///     Создает новое описание файла композиции
         /// </summary>
-        /// <param name="name">
+        /// <param path="path">
         ///     Имя и путь к файлу композиции
         /// </param>
-        public Track(string name) : this()
+        /// <param name="path"></param>
+        public Track(string path) : this()
         {
-            Name = name;
+            try
+            {
+                if (File.Exists(path))
+                _path = path;
+                //TODO: 
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
         /// <summary>
         ///     Имя и путь к файлу композиции
         /// </summary>
-        public string Name { get; set; }
+        public string Path
+        {
+            get { return _path; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) && File.Exists(value))
+                    _path = value;
+
+            }
+        }
+
+        public TrackInfo TrackInfo
+        {
+            get
+            {
+                return _trackInfo;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    _trackInfo = value;
+                }
+
+            }
+            
+        }
     }
 }

@@ -80,7 +80,7 @@ namespace FreeAmp.Core
         public int Count => Tracks.Count;
 
         /// <summary>
-        ///     Возвращает указатель на текущий трек
+        ///     Возвращает и получает указатель на текущий трек
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Возникает при выходе текушей позиции за пределы списка

@@ -1,4 +1,4 @@
-﻿<Window x:Class="FreeAmp.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,8 +7,9 @@
         xmlns:style="clr-namespace:FreeAmp"
         xmlns:core="clr-namespace:FreeAmp.Core"
         xmlns:sp="clr-namespace:FreeAmp"
+        xmlns:UIComponents="clr-namespace:FreeAmp.UIComponents" x:Name="window" x:Class="FreeAmp.MainWindow"
         mc:Ignorable="d"
-        Title="FreeAmp" Height="400" Width="600" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None" >
+        Title="FreeAmp" Height="400" Width="600" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None" Loaded="Window_Loaded" >
     <Grid x:Name="MainGrid" Background="#FF6E6E6E">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -20,9 +21,10 @@
         </Grid.RowDefinitions>
         <Button x:Name="button" Content="Play" Grid.Column="1" HorizontalAlignment="Left" Margin="85,35,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
         <Button x:Name="button1" Content="Stop"  Grid.Column="1" HorizontalAlignment="Left" Margin="210,35,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
-        <Button x:Name="button2" Content="Next" Grid.Column="1" HorizontalAlignment="Left" Margin="325,35,0,0" VerticalAlignment="Top" Width="75" Click="button2_Click"/>
-        <Label x:Name="label" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="190,80,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button2" Content="Next" Grid.Column="1" HorizontalAlignment="Left" Margin="407,35,0,0" VerticalAlignment="Top" Width="75" Click="button2_Click"/>
         <Button x:Name="button3" Content="Button" HorizontalAlignment="Left" Margin="45,35,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" Click="button3_Click"/>
+        <Slider x:Name="slider" Grid.Column="1" Margin="35,70,77,0" VerticalAlignment="Top" Height="20" Interval="23" IsMoveToPointEnabled="True" Maximum="{Binding SP.TrackTotalTime, ElementName=window, Mode=OneWay}" Value="{Binding SP.TrackCurrentPosition, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SourceUpdated="Slider_OnSourceUpdated"/>
+        <Button x:Name="button4" Content="Prewiev" Grid.Column="1" HorizontalAlignment="Left" Margin="310,35,0,0" VerticalAlignment="Top" Width="75" Click="Button4_OnClick"/>
 
     </Grid>
 
