@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NAudio.Wave;
 
 namespace FreeAmp.Core
 {
@@ -81,6 +82,9 @@ namespace FreeAmp.Core
         /// <summary>
         ///     Возвращает указатель на текущий трек
         /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Возникает при выходе текушей позиции за пределы списка
+        /// </exception>
         public uint CurPos
         {
             get { return Tracks.Count == 0 ? 0 : _curPos; }
@@ -172,7 +176,7 @@ namespace FreeAmp.Core
                 throw new TrackListException("Список воспроизведения пуст!",
                     new Dictionary<int, string>(1) {{1, Tracks.Count.ToString()}});
             }
-            if (CurPos == Tracks.Count - 1)
+            if (CurPos == Tracks.Count)
             {
                 throw new TrackListException("Список воспроизведения достиг конечной точки!",
                     new Dictionary<int, string>(1) {{1, Tracks.Count.ToString()}});
@@ -320,7 +324,7 @@ namespace FreeAmp.Core
                 throw new TrackListException("Список воспроизведения пуст!",
                     new Dictionary<int, string>(1) {{1, Tracks.Count.ToString()}});
             }
-            return Tracks[(int) _curPos];
+            return Tracks[(int)_curPos];
         }
 
         /// <summary>
@@ -427,5 +431,8 @@ namespace FreeAmp.Core
         {
             ChangeCurPosition?.Invoke(this, new ChangePositionInTrackListEventArgs(pos));
         }
+
     }
+
+    
 }

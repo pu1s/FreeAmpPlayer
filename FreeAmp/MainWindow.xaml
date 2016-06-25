@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:FreeAmp"
         xmlns:style="clr-namespace:FreeAmp"
         xmlns:core="clr-namespace:FreeAmp.Core"
+        xmlns:sp="clr-namespace:FreeAmp"
         mc:Ignorable="d"
         Title="FreeAmp" Height="400" Width="600" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None" >
     <Grid x:Name="MainGrid" Background="#FF6E6E6E">
@@ -17,7 +18,12 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button x:Name="button" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="55,25,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <Button x:Name="button" Content="Play" Grid.Column="1" HorizontalAlignment="Left" Margin="85,35,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <Button x:Name="button1" Content="Stop"  Grid.Column="1" HorizontalAlignment="Left" Margin="210,35,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
+        <Button x:Name="button2" Content="Next" Grid.Column="1" HorizontalAlignment="Left" Margin="325,35,0,0" VerticalAlignment="Top" Width="75" Click="button2_Click"/>
+        <Label x:Name="label" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="190,80,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button3" Content="Button" HorizontalAlignment="Left" Margin="45,35,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" Click="button3_Click"/>
+
     </Grid>
 
 </Window>
