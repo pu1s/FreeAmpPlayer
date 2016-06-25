@@ -7,7 +7,7 @@
         xmlns:style="clr-namespace:FreeAmp"
         xmlns:core="clr-namespace:FreeAmp.Core"
         xmlns:sp="clr-namespace:FreeAmp"
-        xmlns:UIComponents="clr-namespace:FreeAmp.UIComponents" x:Name="window" x:Class="FreeAmp.MainWindow"
+        xmlns:UIComponents="clr-namespace:FreeAmp.UIComponents" xmlns:freeampcontrols="clr-namespace:freeampcontrols;assembly=freeampcontrols" x:Name="window" x:Class="FreeAmp.MainWindow"
         mc:Ignorable="d"
         Title="FreeAmp" Height="400" Width="600" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None" Loaded="Window_Loaded" >
     <Grid x:Name="MainGrid" Background="#FF6E6E6E">
@@ -25,6 +25,7 @@
         <Button x:Name="button3" Content="Button" HorizontalAlignment="Left" Margin="45,35,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" Click="button3_Click"/>
         <Slider x:Name="slider" Grid.Column="1" Margin="35,70,77,0" VerticalAlignment="Top" Height="20" Interval="23" IsMoveToPointEnabled="True" Maximum="{Binding SP.TrackTotalTime, ElementName=window, Mode=OneWay}" Value="{Binding SP.TrackCurrentPosition, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SourceUpdated="Slider_OnSourceUpdated"/>
         <Button x:Name="button4" Content="Prewiev" Grid.Column="1" HorizontalAlignment="Left" Margin="310,35,0,0" VerticalAlignment="Top" Width="75" Click="Button4_OnClick"/>
+        <UIComponents:freeampTrackBar HorizontalAlignment="Left" Height="100" Margin="80,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="360" Grid.ColumnSpan="2"/>
 
     </Grid>
 
