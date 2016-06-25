@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Management;
 using System.Reflection.Emit;
 using System.Timers;
 using System.Windows;
@@ -21,20 +22,15 @@ namespace FreeAmp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private SPlayer _sp;
 
 
-        public SPlayer SP
-        {
-            get { return _sp; }
-        }
-
-        public List<Track> Tracks => _sp.TrackList.Tracks;
-
-        
+        public SoundPlayer sp { get; set; } = null;
+        private TrackList _trackList = new TrackList("");
         public MainWindow()
         {
             InitializeComponent();
+
+            #region Command implementation
 
             this.CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, this.OnCloseWindow));
             this.CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, this.OnMaximizeWindow,
@@ -46,34 +42,16 @@ namespace FreeAmp
             this.CommandBindings.Add(new CommandBinding(SystemCommands.ShowSystemMenuCommand, this.OnSystemMenuShow,
                 null));
 
+            #endregion
+
+            sp = new SoundPlayer();
             
-            slider.ValueChanged += Slider_ValueChanged;
-            _sp = new SPlayer {Slider = slider};
-
-            _sp.TrackList.AppendTrack(
-                new Track(@"D:\Music\Savage - Greatest Hits & Remixes (2 CD) (2016)\CD2\07-Radio (Maxi Version).mp3"));
-            _sp.TrackList.AppendTrack(new Track(@"D:\Music\Океан Ельзи - Без меж (2016)\02. Не йди.mp3"));
-            _sp.TrackList.AppendTrack(
-                new Track(@"D:\Music\Savage - Greatest Hits & Remixes (2 CD) (2016)\CD2\07-Radio (Maxi Version).mp3"));
+            _trackList.AppendTrack(new Track(@"D:\Music\Savage - Greatest Hits & Remixes (2 CD) (2016)\CD2\01-Only You (Remix).mp3"));
+            sp.Load(_trackList);
         }
 
-       
+        #region CommandWindow
 
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            _sp.TrackCurrentPosition = e.NewValue;
-        }
-
-        
-
-        public static readonly DependencyProperty ShowMenuItemProperty = DependencyProperty.Register(
-            "));ShowMenuItem", typeof (bool), typeof (MainWindow), new PropertyMetadata(default(bool)));
-
-        public bool ShowMenuItem
-        {
-            get { return (bool) GetValue(ShowMenuItemProperty); }
-            set { SetValue(ShowMenuItemProperty, value); }
-        }
 
         private void OnSystemMenuShow(object target, ExecutedRoutedEventArgs e)
         {
@@ -110,60 +88,9 @@ namespace FreeAmp
             SystemCommands.RestoreWindow(this);
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            if (_sp.IsPlaying)
-            {
-                button.Content = "Pause";
-                _sp.Pause();
-              
-                return;
-            }
-            if (_sp.IsPaused)
-            {
-                button.Content = "Play";
-                _sp.Resume();
-               
-                return;
-            }
 
-            _sp.Play(_sp.TrackList.GetCurrentTrack());
-           
-        }
+        #endregion
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            _sp.Stop();
-            
-        }
-
-        private void button2_Click(object sender, RoutedEventArgs e)
-        {
-            _sp.Next();
-            
-        }
-
-        private void button3_Click(object sender, RoutedEventArgs e)
-        {
-            var ofd = new OpenFileDialog
-            {
-                Multiselect = false,
-                Filter = "(Файлы mp3)|*.mp3"
-            };
-
-            var dr = ofd.ShowDialog();
-
-            var track = new Track
-            {
-                Path = ofd.FileName,
-                TrackInfo = TrackInfoFactory.GetTrackInfo(ofd.FileName)
-            };
-            Debug.WriteLine(track.TrackInfo.Id3V1TagInfo.Title);
-            _sp.TrackList.AppendTrack(track);
-            _sp.TrackList.CurPos = (uint) Tracks.Count - 1;
-            slider.Value = 0;
-            _sp.Play();
-        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -172,14 +99,18 @@ namespace FreeAmp
         }
 
 
-        private void Button4_OnClick(object sender, RoutedEventArgs e)
+      
+
+        private void button_Click(object sender, RoutedEventArgs e)
         {
-            _sp.Prewiev();
+
+            if (sp.PlaybackState == PlaybackState.Playing) return;
+            sp.Play();
         }
 
-        private void Slider_OnSourceUpdated(object sender, DataTransferEventArgs e)
+        private void button1_Click(object sender, RoutedEventArgs e)
         {
-            slider.Value = _sp.TrackCurrentPosition;
+            
         }
     }
 }

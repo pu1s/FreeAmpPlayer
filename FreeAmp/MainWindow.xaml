@@ -19,13 +19,8 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button x:Name="button" Content="Play" Grid.Column="1" HorizontalAlignment="Left" Margin="85,35,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <Button x:Name="button1" Content="Stop"  Grid.Column="1" HorizontalAlignment="Left" Margin="210,35,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
-        <Button x:Name="button2" Content="Next" Grid.Column="1" HorizontalAlignment="Left" Margin="407,35,0,0" VerticalAlignment="Top" Width="75" Click="button2_Click"/>
-        <Button x:Name="button3" Content="Button" HorizontalAlignment="Left" Margin="45,35,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" Click="button3_Click"/>
-        <Slider x:Name="slider" Grid.Column="1" Margin="35,70,77,0" VerticalAlignment="Top" Height="20" Interval="23" IsMoveToPointEnabled="True" Maximum="{Binding SP.TrackTotalTime, ElementName=window, Mode=OneWay}" Value="{Binding SP.TrackCurrentPosition, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SourceUpdated="Slider_OnSourceUpdated"/>
-        <Button x:Name="button4" Content="Prewiev" Grid.Column="1" HorizontalAlignment="Left" Margin="310,35,0,0" VerticalAlignment="Top" Width="75" Click="Button4_OnClick"/>
-        <UIComponents:freeampTrackBar HorizontalAlignment="Left" Height="100" Margin="80,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="360" Grid.ColumnSpan="2"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <Button x:Name="button1" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
 
     </Grid>
 

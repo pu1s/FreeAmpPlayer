@@ -33,7 +33,7 @@ namespace FreeAmp.Core
             {
                 if (File.Exists(path))
                 _path = path;
-                //TODO: 
+                TrackInfo = TrackInfoFactory.GetTrackInfo(_path);
             }
             catch
             {

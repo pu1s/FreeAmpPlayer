@@ -19,11 +19,9 @@ namespace FreeAmp.Core
             _device = new WaveOut();
             _audioFileReader = null;
             TrackList = TrackList.Empty;
-            Slider = new Slider();
+           
         }
 
-
-       public Slider Slider { get; set; }
         
         public TrackList TrackList { get; set; }
         public bool IsPlaying => _device?.PlaybackState == PlaybackState.Playing;
@@ -44,7 +42,7 @@ namespace FreeAmp.Core
         {
             get
             {
-                Slider.Maximum = _audioFileReader.TotalTime.TotalSeconds;
+               
                 return _audioFileReader.TotalTime.TotalSeconds;
             }
         }
@@ -54,7 +52,7 @@ namespace FreeAmp.Core
         {
             get
             {
-                Slider.Value = _audioFileReader.CurrentTime.TotalSeconds;
+                
                 return _audioFileReader.CurrentTime.TotalSeconds;
             }
             set
@@ -202,9 +200,6 @@ namespace FreeAmp.Core
         }
 
 
-        protected virtual void OnPosChanged(PropertyChangedEventArgs e)
-        {
-            PosChanged?.Invoke(this, e);OnPosChanged(new PropertyChangedEventArgs("Position"));
-        }
+       
     }
 }

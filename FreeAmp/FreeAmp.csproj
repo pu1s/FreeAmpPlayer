@@ -117,6 +117,7 @@
     <Compile Include="Core\ChangePositionInTrackListEventArgs.cs" />
     <Compile Include="Core\CoreAudio.cs" />
     <Compile Include="Core\RepeatMode.cs" />
+    <Compile Include="Core\SoundPlayer.cs" />
     <Compile Include="Core\SPlayer.cs" />
     <Compile Include="Core\TrackInfo.cs" />
     <Compile Include="Core\TrackList.cs" />
