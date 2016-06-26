@@ -8,6 +8,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 using FreeAmp.Core;
 using Microsoft.Win32;
 using NAudio.CoreAudioApi;
@@ -26,6 +27,8 @@ namespace FreeAmp
 
         public SoundPlayer sp { get; set; } = null;
         private TrackList _trackList = new TrackList("");
+        private DispatcherTimer timer = new DispatcherTimer();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -44,10 +47,36 @@ namespace FreeAmp
 
             #endregion
 
+            timer.Interval = TimeSpan.FromSeconds(0.1);
+            timer.Tick += Timer_Tick;
             sp = new SoundPlayer();
-            
-            _trackList.AppendTrack(new Track(@"D:\Music\Savage - Greatest Hits & Remixes (2 CD) (2016)\CD2\01-Only You (Remix).mp3"));
-            sp.Load(_trackList);
+            sp.TrackLoaded += Sp_TrackLoaded;
+            sp.StartPlaying += Sp_StartPlaying;
+            sp.StopPlaying += Sp_StopPlaying;
+            _trackList.AppendTrack(
+                new Track(@"D:\Music\Savage - Greatest Hits & Remixes (2 CD) (2016)\CD2\01-Only You (Remix).mp3"));
+            sp.Load(_trackList.GetCurrentTrack());
+        }
+
+        private void Sp_TrackLoaded(object sender, EventArgs e)
+        {
+            slider.Maximum = sp.TrackTotalTime;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            slider.Value = sp.CurrentTrackTime;
+        }
+
+        private void Sp_StopPlaying(object sender, EventArgs e)
+        {
+            timer.Stop();
+        }
+
+        private void Sp_StartPlaying(object sender, EventArgs e)
+        {
+
+            timer.Start();
         }
 
         #region CommandWindow
@@ -99,7 +128,7 @@ namespace FreeAmp
         }
 
 
-      
+
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
@@ -110,7 +139,12 @@ namespace FreeAmp
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            
+
+        }
+
+        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            sp.CurrentTrackTime = slider.Value;
         }
     }
 }
