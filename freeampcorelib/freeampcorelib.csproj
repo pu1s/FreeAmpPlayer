@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="src\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\TrackList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

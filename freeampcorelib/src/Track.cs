@@ -32,16 +32,11 @@ namespace freeampcorelib
         /// <param name="path"></param>
         public Track(string path) : this()
         {
-            try
-            {
+           
                 if (File.Exists(path))
                     _path = path;
-                TrackInfo = TrackInfoFactory.GetTrackInfo(_path);
-            }
-            catch
-            {
-                // ignored
-            }
+                _trackInfo = TrackInfoFactory.GetTrackInfo(_path);
+           
         }
 
         /// <summary>
@@ -95,7 +90,7 @@ namespace freeampcorelib
             // if file extension
             switch (fi.Extension)
             {
-                case "mp3":
+                case ".mp3":
                     using (var fileReader = new Mp3FileReader(file))
                     {
                         ti.FileName = fi.FullName;
@@ -115,11 +110,11 @@ namespace freeampcorelib
                         if (fileReader.Id3v2Tag != null)
                         {
                             //TODO: добавить обработку ID3v2 тегов
-                            throw new NotImplementedException();
+                            //throw new NotImplementedException();
                         }
                     }
                     break;
-                case "wav":
+                case ".wav":
                     //TODO: добавить обработку wav файлов
                     throw new NotImplementedException();
             }
@@ -358,7 +353,7 @@ namespace freeampcorelib
                 tagInfo.Year = RemoveWhiteSpace(tagstring.Substring(93, 4));
                 tagInfo.Comment = RemoveWhiteSpace(tagstring.Substring(97, 28));
                 tagInfo.TrackNumber = buffer[125] == 0 ? (uint) buffer[126] : 0;
-                tagInfo.Genre = audioGenres[buffer[127]];
+                //tagInfo.Genre = audioGenres[buffer[127]];
             }
             return tagInfo;
         }

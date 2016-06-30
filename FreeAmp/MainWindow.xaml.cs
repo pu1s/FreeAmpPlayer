@@ -8,7 +8,7 @@ using System.Reflection.Emit;
 using System.Timers;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Forms;
+
 using System.Windows.Input;
 using System.Windows.Threading;
 using FreeAmp.Core;
@@ -17,6 +17,8 @@ using NAudio.CoreAudioApi;
 using NAudio.Utils;
 using NAudio.Wave;
 using Un4seen.Bass;
+using freeampcorelib;
+using TrackList = freeampcorelib.TrackList;
 
 namespace FreeAmp
 {
@@ -28,7 +30,7 @@ namespace FreeAmp
 
 
         public SoundPlayer sp { get; set; } = null;
-        private TrackList _trackList = new TrackList("");
+        private freeampcorelib.TrackList tl = new TrackList();
         private DispatcherTimer timer;
         
         public MainWindow()
@@ -53,9 +55,9 @@ namespace FreeAmp
             sp = new SoundPlayer();
             sp.TrackLoaded += Sp_TrackLoaded;
             timer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(1000)};
-            timer.Tick += Timer_Tick;
-            _trackList.AppendTrack(
-                new Track(@"E:\23_justin_timberlake_cant_stop_the_feeling_myzuka.fm.mp3"));
+            //timer.Tick += Timer_Tick;
+            //_trackList.AppendTrack(
+            //    new Track(@"E:\23_justin_timberlake_cant_stop_the_feeling_myzuka.fm.mp3"));
            
         }
 
@@ -129,15 +131,20 @@ namespace FreeAmp
         {
            
            
-            sp.Load(_trackList.GetCurrentTrack());
-            if(!timer.IsEnabled) timer.Start();
-            sp.Play();
+            //sp.Load(_trackList.GetCurrentTrack());
+            //if(!timer.IsEnabled) timer.Start();
+            //sp.Play();
            
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            button1.Content = sp.BitRate.ToString();
+             
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Multiselect = true;
+            ofd.ShowDialog(this);
+            tl.Items.Add(new freeampcorelib.Track(ofd.FileName));
+           
 
         }
 
