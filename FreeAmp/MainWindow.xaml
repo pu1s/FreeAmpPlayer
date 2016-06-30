@@ -21,38 +21,39 @@
         </Grid.RowDefinitions>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
         <Button x:Name="button1" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
-        <Slider x:Name="slider" Style="{DynamicResource freeampTrackBarStyle}"  HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="562" Maximum="{Binding sp.TrackTotalTime, ElementName=window, Mode=OneWay}" Grid.ColumnSpan="2" ValueChanged="slider_ValueChanged"/>
+        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="15,70,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="535"/>
 
     </Grid>
     <Window.Resources>
-<Style x:Key="freeampTrackBarStyle" TargetType="Slider">
-    <Setter Property="Template">
-        <Setter.Value>
+        <Style x:Key="freeampTrackBarStyle" TargetType="Slider">
+
+            <Setter Property="Template">
+                <Setter.Value>
                     <ControlTemplate>
                         <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"></RowDefinition>
-                                    <RowDefinition Height="20"></RowDefinition>
-                                    <RowDefinition Height="1*"></RowDefinition>
-                                </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                            </Grid.RowDefinitions>
                             <Track>
-                               <Track.Thumb>
-                                   <Thumb Style="{DynamicResource freeampSliderThumb}"></Thumb>
-                               </Track.Thumb>
-                            </Track>    
-                           
-                            </Grid>
-                        
+                                <Track.Thumb>
+                                    <Thumb Style="{DynamicResource freeampSliderThumb}"></Thumb>
+                                </Track.Thumb>
+                            </Track>
+
+                        </Grid>
+
                     </ControlTemplate>
-        </Setter.Value>
-    </Setter>
-</Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <ControlTemplate x:Key="freeampSlider" x:Name="freeampControlTemplate">
             <AdornerDecorator>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="5"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <TickBar Grid.Row="1">

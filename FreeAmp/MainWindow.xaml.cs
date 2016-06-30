@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Management;
 using System.Reflection.Emit;
 using System.Timers;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
 using FreeAmp.Core;
@@ -14,7 +16,7 @@ using Microsoft.Win32;
 using NAudio.CoreAudioApi;
 using NAudio.Utils;
 using NAudio.Wave;
-
+using Un4seen.Bass;
 
 namespace FreeAmp
 {
@@ -27,8 +29,8 @@ namespace FreeAmp
 
         public SoundPlayer sp { get; set; } = null;
         private TrackList _trackList = new TrackList("");
-        private DispatcherTimer timer = new DispatcherTimer();
-
+        private DispatcherTimer timer;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -47,20 +49,22 @@ namespace FreeAmp
 
             #endregion
 
-            timer.Interval = TimeSpan.FromSeconds(0.1);
-            timer.Tick += Timer_Tick;
+            
             sp = new SoundPlayer();
             sp.TrackLoaded += Sp_TrackLoaded;
-            sp.StartPlaying += Sp_StartPlaying;
-            sp.StopPlaying += Sp_StopPlaying;
+            timer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(1000)};
+            timer.Tick += Timer_Tick;
             _trackList.AppendTrack(
-                new Track(@"D:\Music\Savage - Greatest Hits & Remixes (2 CD) (2016)\CD2\01-Only You (Remix).mp3"));
-            sp.Load(_trackList.GetCurrentTrack());
+                new Track(@"E:\23_justin_timberlake_cant_stop_the_feeling_myzuka.fm.mp3"));
+           
         }
+
+       
 
         private void Sp_TrackLoaded(object sender, EventArgs e)
         {
             slider.Maximum = sp.TrackTotalTime;
+          
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -68,16 +72,7 @@ namespace FreeAmp
             slider.Value = sp.CurrentTrackTime;
         }
 
-        private void Sp_StopPlaying(object sender, EventArgs e)
-        {
-            timer.Stop();
-        }
-
-        private void Sp_StartPlaying(object sender, EventArgs e)
-        {
-
-            timer.Start();
-        }
+       
 
         #region CommandWindow
 
@@ -132,13 +127,17 @@ namespace FreeAmp
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-
-            if (sp.PlaybackState == PlaybackState.Playing) return;
+           
+           
+            sp.Load(_trackList.GetCurrentTrack());
+            if(!timer.IsEnabled) timer.Start();
             sp.Play();
+           
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
+            button1.Content = sp.BitRate.ToString();
 
         }
 

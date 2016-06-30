@@ -15,7 +15,7 @@ namespace FreeAmp.Core
 
         public SoundPlayer()
         {
-            DeviceWaveOut = new WaveOut();
+            DeviceWaveOut = new DirectSoundOut();
             DeviceWaveOut.PlaybackStopped += Out_PlaybackStopped;
         }
 
@@ -27,8 +27,9 @@ namespace FreeAmp.Core
             Stop();
         }
 
+        private BlockAlignReductionStream bstream { get; set; } = null;
         private Mp3FileReader FileReader { get; set; } = null;
-        private WaveOut DeviceWaveOut { get; set; } = null;
+        private DirectSoundOut DeviceWaveOut { get; set; } = null;
 
         public PlaybackState PlaybackState => DeviceWaveOut.PlaybackState;
 
@@ -48,7 +49,7 @@ namespace FreeAmp.Core
 
         public int BitRate => FileReader.Mp3WaveFormat.BitsPerSample;
 
-        public int Channels => FileReader.Mp3WaveFormat.BitsPerSample;
+        public int Channels => FileReader.Mp3WaveFormat.Channels;
 
         public void Pause()
         {
@@ -59,11 +60,9 @@ namespace FreeAmp.Core
 
         public void Play()
         {
-            if (DeviceWaveOut.PlaybackState != PlaybackState.Playing & DeviceWaveOut!=null & FileReader!=null)
-            {
-                DeviceWaveOut.Play();
-                OnStartPlaying();
-            }
+           
+            DeviceWaveOut.Play();
+            OnStartPlaying();
         }
         public void Resume()
         {
@@ -77,18 +76,38 @@ namespace FreeAmp.Core
             if (DeviceWaveOut == null || FileReader == null) return;
             DeviceWaveOut.Stop();
             OnStopPlaying();
-            DeviceWaveOut.Dispose();
-            FileReader.Dispose();
+           DisposeDevice();
+           
         }
 
+        private void DisposeDevice()
+        {
+            if (DeviceWaveOut != null)
+            {
+                if (DeviceWaveOut.PlaybackState == PlaybackState.Playing ||
+                    DeviceWaveOut.PlaybackState == PlaybackState.Paused)
+                {
+                    DeviceWaveOut.Stop();
+                    DeviceWaveOut = null;
+                }
+            }
+            if (bstream == null) return;
+            bstream.Dispose();
+            bstream = null;
+        }
         public SoundPlayer Load(Track track)
         {
+            DisposeDevice();
             if (track == null) return null;
-           
-            DeviceWaveOut = new WaveOut();
+            
+            DeviceWaveOut = new DirectSoundOut();
             FileReader = new Mp3FileReader(track.Path);
-            DeviceWaveOut.Init(FileReader);
+           
+            WaveStream pcm = WaveFormatConversionStream.CreatePcmStream(FileReader);
+            bstream = new BlockAlignReductionStream(pcm);
+            DeviceWaveOut.Init(bstream);
             OnTrackLoaded();
+            
             return this;
             
         }
@@ -108,4 +127,6 @@ namespace FreeAmp.Core
             TrackLoaded?.Invoke(this, EventArgs.Empty);
         }
     }
+
+
 }

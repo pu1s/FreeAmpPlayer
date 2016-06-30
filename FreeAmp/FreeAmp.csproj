@@ -79,10 +79,6 @@
     <Reference Include="Bass.Net">
       <HintPath>.\Bass.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Id3, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ID3.0.3.0\lib\net40\Id3.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
       <Private>True</Private>
@@ -96,6 +92,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
     <Reference Include="System.Management.Instrumentation" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -118,7 +115,6 @@
     <Compile Include="Core\CoreAudio.cs" />
     <Compile Include="Core\RepeatMode.cs" />
     <Compile Include="Core\SoundPlayer.cs" />
-    <Compile Include="Core\SPlayer.cs" />
     <Compile Include="Core\TrackInfo.cs" />
     <Compile Include="Core\TrackList.cs" />
     <Compile Include="Core\Track.cs" />
