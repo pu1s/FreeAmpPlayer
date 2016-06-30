@@ -20,6 +20,7 @@ using Un4seen.Bass;
 using freeampcorelib;
 using TrackList = freeampcorelib.TrackList;
 
+
 namespace FreeAmp
 {
     /// <summary>
