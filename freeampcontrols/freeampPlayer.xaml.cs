@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace freeampcontrols
 {
     /// <summary>
-    /// Логика взаимодействия для UserControl1.xaml
+    /// Логика взаимодействия для freeampPlayerControl.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class freeampPlayerControl : UserControl
     {
-        public UserControl1()
+        public freeampPlayerControl()
         {
             InitializeComponent();
         }
