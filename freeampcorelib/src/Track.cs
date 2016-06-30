@@ -101,6 +101,7 @@ namespace freeampcorelib
                             // считываем тег
                             ti.Id3V1TagInfo = TagReader.Id3v1TagReader(fileReader.Id3v1Tag);
                             //обновляем данные о файле из тега
+                            ti.Title = ti.Id3V1TagInfo.Title;
                             ti.Album = ti.Id3V1TagInfo.Album;
                             ti.Artist = ti.Id3V1TagInfo.Artist;
                             ti.Comment = ti.Id3V1TagInfo.Comment;
@@ -111,6 +112,7 @@ namespace freeampcorelib
                         {
                             //TODO: добавить обработку ID3v2 тегов
                             //throw new NotImplementedException();
+                           
                         }
                     }
                     break;
@@ -144,12 +146,12 @@ namespace freeampcorelib
         public int Rating { get; set; }
         public string Comment { get; set; }
         public DateTime LastPlaying { get; set; }
-        public Id3V1TagInfo Id3V1TagInfo { get; set; }
+        public Id3v1TagInfo Id3V1TagInfo { get; set; }
     }
     /// <summary>
     /// Данные, содержащиеся в теге ID3v1 аудио файла
     /// </summary>
-    public class Id3V1TagInfo
+    public class Id3v1TagInfo
     {
         public string Title { get; set; }
         public string Album { get; set; }
@@ -340,9 +342,9 @@ namespace freeampcorelib
         /// <returns>
         ///     Форматированная информация
         /// </returns>
-        public static Id3V1TagInfo Id3v1TagReader(byte[] tag)
+        public static Id3v1TagInfo Id3v1TagReader(byte[] tag)
         {
-            var tagInfo = new Id3V1TagInfo();
+            var tagInfo = new Id3v1TagInfo();
             var buffer = tag;
             var tagstring = Encoding.UTF8.GetString(buffer);
             if (tagstring.Substring(0, 3) == "TAG")
@@ -360,8 +362,13 @@ namespace freeampcorelib
             return tagInfo;
         }
 
+        public static Id3v2TagInfo Id3v2TagReader(byte[] tag)
+        {
+            //TODO: написать определение
+            return new Id3v2TagInfo();
+        }
         [Obsolete]
-        public static bool ReadTrackId3V1Tag(string file, ref Id3V1TagInfo ti)
+        public static bool ReadTrackId3V1Tag(string file, ref Id3v1TagInfo ti)
         {
             var hasTag = false;
             var buffer = new byte[128];
@@ -405,6 +412,11 @@ namespace freeampcorelib
             }
             return hasTag;
         }
+    }
+
+    public class Id3v2TagInfo
+    {
+
     }
 
     #endregion
