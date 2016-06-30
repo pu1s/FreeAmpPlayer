@@ -353,7 +353,9 @@ namespace freeampcorelib
                 tagInfo.Year = RemoveWhiteSpace(tagstring.Substring(93, 4));
                 tagInfo.Comment = RemoveWhiteSpace(tagstring.Substring(97, 28));
                 tagInfo.TrackNumber = buffer[125] == 0 ? (uint) buffer[126] : 0;
-                //tagInfo.Genre = audioGenres[buffer[127]];
+               
+                tagInfo.Genre = buffer[127] > 147 ? string.Empty : audioGenres[buffer[127]];
+                
             }
             return tagInfo;
         }
