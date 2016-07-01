@@ -115,7 +115,7 @@ namespace freeampcorelib
                     //         //ti.Id3TagInfo = mp3.GetAllTags();
                     //    }
                     //}
-
+                    //
                     //***********************************************************************
                     // Using ID3 lib v0.3.0
                     //***********************************************************************
@@ -126,9 +126,12 @@ namespace freeampcorelib
                             if (mp3Stream.HasTags)
                             {
                                 ti.Id3TagInfo = mp3Stream.GetAllTags();
-                                
+                                if (ti.Id3TagInfo.Length > 0)
+                                {
+                                   //TODO: закончить
+                                }
                             }
-                            //TODO: закончить
+                            
                         }
                     }
                     break;
