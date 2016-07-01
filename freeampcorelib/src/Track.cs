@@ -119,15 +119,16 @@ namespace freeampcorelib
                     //***********************************************************************
                     // Using ID3 lib v0.3.0
                     //***********************************************************************
-                    using (var fileStream = new FileStream(file, FileMode.Open))
+                    using (var fileStream = new FileStream(file, FileMode.Open, FileAccess.Read))
                     {
                         using (var mp3Stream = new Mp3Stream(fileStream))
                         {
                             if (mp3Stream.HasTags)
                             {
                                 ti.Id3TagInfo = mp3Stream.GetAllTags();
-                                //TODO: закончить
+                                
                             }
+                            //TODO: закончить
                         }
                     }
                     break;
