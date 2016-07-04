@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace freeampcontrols
 {
     /// <summary>
-    /// Логика взаимодействия для freeampTrackBar.xaml
+    /// Логика взаимодействия для freeampTrackBarControl.xaml
     /// </summary>
-    public partial class freeampTrackBar : UserControl
+    public partial class freeampTrackBarControl : UserControl
     {
-        public freeampTrackBar()
+        public freeampTrackBarControl()
         {
             InitializeComponent();
         }

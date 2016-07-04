@@ -9,7 +9,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="UIResources/UIResources.xaml" />
                 <ResourceDictionary Source="/freeampcontrols;component/Simple Styles.xaml"/>
-                <ResourceDictionary Source="/freeampcontrols;component/VisualControlStyle.xaml"/>
+                <ResourceDictionary Source="/freeampcontrols;component/VisualStyleDictionary.xaml"/>
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

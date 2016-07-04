@@ -49,12 +49,12 @@ namespace FreeAmp
 
         private void Sp_TrackLoaded(object sender, EventArgs e)
         {
-            slider.Maximum = sp.TrackTotalTime;
+            //slider.Maximum = sp.TrackTotalTime;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            slider.Value = sp.CurrentTrackTime;
+            //slider.Value = sp.CurrentTrackTime;
         }
 
 
@@ -82,7 +82,7 @@ namespace FreeAmp
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            sp.CurrentTrackTime = slider.Value;
+            //sp.CurrentTrackTime = slider.Value;
         }
 
         #region CommandWindow
