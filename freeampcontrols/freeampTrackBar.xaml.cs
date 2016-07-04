@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FreeAmp.UIComponents
+namespace freeampcontrols
 {
     /// <summary>
-    /// Логика взаимодействия для CommandButton.xaml
+    /// Логика взаимодействия для freeampTrackBar.xaml
     /// </summary>
-    public partial class CommandButton : UserControl
+    public partial class freeampTrackBar : UserControl
     {
-        public CommandButton()
+        public freeampTrackBar()
         {
             InitializeComponent();
         }

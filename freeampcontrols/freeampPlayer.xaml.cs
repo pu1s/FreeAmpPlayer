@@ -20,6 +20,7 @@ namespace freeampcontrols
     /// </summary>
     public partial class freeampPlayerControl : UserControl
     {
+        
         public freeampPlayerControl()
         {
             InitializeComponent();
