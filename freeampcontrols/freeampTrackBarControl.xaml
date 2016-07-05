@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="14" d:DesignWidth="300">
     <Border Height="14">
-        <Slider x:Name="slider" Margin="0" Style="{DynamicResource SimpleSlider}" VerticalAlignment="Center"/>
+        <Slider x:Name="slider" Margin="0" Style="{DynamicResource SimpleSlider}" VerticalAlignment="Center" Value="5"/>
 
     </Border>
 </UserControl>
