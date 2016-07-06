@@ -23,6 +23,13 @@ namespace freeampcontrols
         public freeamp_TrackBar()
         {
             InitializeComponent();
+            this.slider.IsMoveToPointEnabled = true;
+        }
+
+        public double Value
+        {
+            get { return slider.Value; }
+            set { slider.Value = value; }
         }
     }
 }
