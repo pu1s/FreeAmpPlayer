@@ -1,0 +1,13 @@
+﻿<UserControl x:Name="freeamp_ThumbControl" x:Class="freeampcontrols.freeamp_Thumb"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:freeampcontrols"
+             mc:Ignorable="d" 
+             d:DesignHeight="20" d:DesignWidth="20" Width="12" Height="12">
+    <Grid>
+        <Thumb x:Name="thumb" Margin="0" Style="{DynamicResource SimpleSliderThumb}" Width="Auto" Height="Auto" ClipToBounds="True"/>
+    </Grid>
+    
+</UserControl>
