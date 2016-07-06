@@ -48,8 +48,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="freeamp_TrackBar.xaml.cs">
+    <Compile Include="Controls\TrackBarControl\freeamp_TrackBar.xaml.cs">
       <DependentUpon>freeamp_TrackBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VolumeControl\freeamp_VolumeControl.xaml.cs">
+      <DependentUpon>freeamp_VolumeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -75,11 +78,16 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="freeamp_TrackBar.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Controls\TrackBarControl\freeamp_TrackBar.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\VolumeControl\freeamp_VolumeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

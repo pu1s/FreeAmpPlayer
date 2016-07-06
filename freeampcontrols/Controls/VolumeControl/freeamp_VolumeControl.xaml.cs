@@ -13,23 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace freeampcontrols
+namespace freeampcontrols.Controls.VolumeControl
 {
     /// <summary>
-    /// Логика взаимодействия для freeamp_TrackBar.xaml
+    /// Логика взаимодействия для freeamp_VolumeControl.xaml
     /// </summary>
-    public partial class freeamp_TrackBar : UserControl
+    public partial class freeamp_VolumeControl : UserControl
     {
-        public freeamp_TrackBar()
+        public freeamp_VolumeControl()
         {
             InitializeComponent();
-            this.slider.IsMoveToPointEnabled = true;
-        }
-
-        public double Value
-        {
-            get { return slider.Value; }
-            set { slider.Value = value; }
         }
     }
 }

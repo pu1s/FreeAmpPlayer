@@ -7,7 +7,11 @@
         xmlns:style="clr-namespace:FreeAmp"
         xmlns:core="clr-namespace:FreeAmp.Core"
         xmlns:sp="clr-namespace:FreeAmp"
-        xmlns:UIComponents="clr-namespace:FreeAmp.UIComponents" xmlns:freeampcontrols="clr-namespace:freeampcontrols;assembly=freeampcontrols" x:Name="window" x:Class="FreeAmp.MainWindow"
+        xmlns:UIComponents="clr-namespace:FreeAmp.UIComponents" xmlns:freeampcontrols="clr-namespace:freeampcontrols;assembly=freeampcontrols"
+   
+    xmlns:TrackBarControl="clr-namespace:freeampcontrols.Controls.TrackBarControl;assembly=freeampcontrols"
+   
+    x:Name="window" x:Class="FreeAmp.MainWindow"
         mc:Ignorable="d"
         Title="FreeAmp" Height="400" Width="600" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None" Loaded="Window_Loaded" >
     <Grid x:Name="MainGrid" Background="#FF6E6E6E">
@@ -21,12 +25,10 @@
         </Grid.RowDefinitions>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
         <Button x:Name="button1" Content="Button" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
-        <freeampcontrols:freeamp_TrackBar Margin="0" Grid.ColumnSpan="2"
-                                          Grid.Column="0" Grid.Row="1" VerticalAlignment="Top"/>
+
+
+        <TrackBarControl:freeamp_TrackBar Grid.Column="1" HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="285"/>
 
 
     </Grid>
-    <Window.Resources>
-
-    </Window.Resources>
 </Window>
