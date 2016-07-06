@@ -21,12 +21,12 @@
         </Grid.RowDefinitions>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
         <Button x:Name="button1" Content="Button" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
-        <freeampcontrols:freeamp_TrackBar HorizontalAlignment="Left" Margin="70,20,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2"
-                                          Grid.Column="0" Width="305"/>
+        <freeampcontrols:freeamp_TrackBar Margin="0" Grid.ColumnSpan="2"
+                                          Grid.Column="0" Grid.Row="1" VerticalAlignment="Top"/>
 
 
     </Grid>
     <Window.Resources>
-        
+
     </Window.Resources>
 </Window>
