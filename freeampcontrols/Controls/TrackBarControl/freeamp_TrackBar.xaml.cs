@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace freeampcontrols.Controls.TrackBarControl
 {
@@ -13,12 +14,29 @@ namespace freeampcontrols.Controls.TrackBarControl
             this.slider.IsMoveToPointEnabled = true;
         }
 
+       
+
+        public double Maximum => slider.Maximum;
+
+        public static readonly DependencyProperty ValProperty = DependencyProperty.Register(
+            "Val", typeof (double), typeof (freeamp_TrackBar), new PropertyMetadata(default(double)));
+
+        public double Val
+        {
+            get { return (double) GetValue(ValProperty); }
+            set
+            {
+                SetValue(ValProperty, value);
+         
+            }
+        }
+
         public double Value
         {
             get { return slider.Value; }
             set { slider.Value = value; }
         }
-
-        public double Maximum => slider.Maximum;
     }
+
+    
 }

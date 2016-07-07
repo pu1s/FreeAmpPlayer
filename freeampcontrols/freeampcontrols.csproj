@@ -48,6 +48,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\NewControl\NewControl.xaml.cs">
+      <DependentUpon>NewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TrackBarControl\freeamp_TrackBar.xaml.cs">
       <DependentUpon>freeamp_TrackBar.xaml</DependentUpon>
     </Compile>
@@ -78,6 +81,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\NewControl\NewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\TrackBarControl\freeamp_TrackBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
