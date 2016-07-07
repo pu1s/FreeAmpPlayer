@@ -32,8 +32,7 @@ namespace freeampcontrols.Controls.NewControl
         }
 
         public static readonly DependencyProperty ValueProperty;
-        public static readonly DependencyProperty IaProperty;
-
+        
         public double Value
         {
             get { return (double) GetValue(ValueProperty); }

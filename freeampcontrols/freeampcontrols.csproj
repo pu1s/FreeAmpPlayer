@@ -57,6 +57,9 @@
     <Compile Include="Controls\VolumeControl\freeamp_VolumeControl.xaml.cs">
       <DependentUpon>freeamp_VolumeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\VolumIndicator\freeamp_VolumeIndicatorControl.xaml.cs">
+      <DependentUpon>freeamp_VolumeIndicatorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,6 +95,14 @@
     <Page Include="Controls\VolumeControl\freeamp_VolumeControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\VolumeControl\VolumeStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\VolumIndicator\freeamp_VolumeIndicatorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup />

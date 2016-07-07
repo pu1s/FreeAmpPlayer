@@ -13,6 +13,8 @@
    
     xmlns:NewControl="clr-namespace:freeampcontrols.Controls.NewControl;assembly=freeampcontrols"
    
+    xmlns:VolumeControl="clr-namespace:freeampcontrols.Controls.VolumeControl;assembly=freeampcontrols"
+   
     x:Name="window" x:Class="FreeAmp.MainWindow"
         mc:Ignorable="d"
         Title="FreeAmp" Height="400" Width="600" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None" Loaded="Window_Loaded" >
@@ -29,20 +31,10 @@
         <Button x:Name="button1" Content="Button" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
 
 
-        <TrackBarControl:freeamp_TrackBar Grid.Column="1" HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="285" Value="3" Val="5"/>
+        <TrackBarControl:freeamp_TrackBar Grid.Column="1" HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="285" Value="3"/>
 
 
-        <NewControl:NewControl Grid.Column="1" HorizontalAlignment="Left" Margin="30,85,0,0" VerticalAlignment="Top"/>
-        <NewControl:NewControl Grid.Column="1" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Grid.Row="1" Value="22" Cont="12" Height="170" Width="210" RenderTransformOrigin="0.5,0.5">
-            <NewControl:NewControl.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.08"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </NewControl:NewControl.RenderTransform>
-        </NewControl:NewControl>
+        
 
 
     </Grid>

@@ -15,21 +15,7 @@ namespace freeampcontrols.Controls.TrackBarControl
         }
 
        
-
         public double Maximum => slider.Maximum;
-
-        public static readonly DependencyProperty ValProperty = DependencyProperty.Register(
-            "Val", typeof (double), typeof (freeamp_TrackBar), new PropertyMetadata(default(double)));
-
-        public double Val
-        {
-            get { return (double) GetValue(ValProperty); }
-            set
-            {
-                SetValue(ValProperty, value);
-         
-            }
-        }
 
         public double Value
         {
