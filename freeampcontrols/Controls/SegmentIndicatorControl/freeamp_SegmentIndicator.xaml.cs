@@ -24,5 +24,38 @@ namespace freeampcontrols.Controls.SegmentIndicatorControl
         {
             InitializeComponent();
         }
+        public static readonly DependencyProperty SignalProperty = DependencyProperty.Register(
+            "Signal", typeof(bool), typeof(freeamp_SegmentIndicator), new PropertyMetadata(OnSignalChange));
+
+        public static readonly DependencyProperty SegmentStateProperty = DependencyProperty.Register(
+            "SegmentState", typeof(bool), typeof(freeamp_SegmentIndicator),
+            new PropertyMetadata(OnSegmentStateChanged));
+
+
+        public bool SegmentState
+        {
+            get { return (bool)GetValue(SegmentStateProperty); }
+            set { SetValue(SegmentStateProperty, value); }
+        }
+
+        public bool Signal
+        {
+            get { return (bool)GetValue(SignalProperty); }
+            set { SetValue(SignalProperty, value); }
+        }
+
+        public bool IsSignal { get; set; }
+        public bool IsSegmentState { get; set; } = false;
+
+        private static void OnSignalChange(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+        {
+            ((freeamp_SegmentIndicator)dependencyObject).IsSignal = (bool)args.NewValue;
+        }
+
+        private static void OnSegmentStateChanged(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs args)
+        {
+            ((freeamp_SegmentIndicator)dependencyObject).SegmentState = (bool)args.NewValue;
+        }
     }
 }

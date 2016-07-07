@@ -23,8 +23,8 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="8*"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Fill="{DynamicResource BlueColorBrush}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="11"/>
-            <Rectangle Fill="{DynamicResource BlueColorBrush}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="11" Grid.Column="2"/>
+            <Rectangle Fill="{DynamicResource SegmentIndicatorNormalBackground}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="11"/>
+            <Rectangle Fill="{DynamicResource SegmentIndicatorNormalBackground}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="11" Grid.Column="2"/>
         </Grid>
 
 
