@@ -21,4 +21,7 @@
             
         </Grid>
     </Border>
+    <UserControl.Resources>
+        <ResourceDictionary Source="../../Themes/Generic.xaml"/>
+    </UserControl.Resources>
 </UserControl>

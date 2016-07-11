@@ -15,10 +15,12 @@
    
     xmlns:VolumeControl="clr-namespace:freeampcontrols.Controls.VolumeControl;assembly=freeampcontrols"
    
+    xmlns:MinVolIndicator="clr-namespace:freeampcontrols.Controls.MinVolIndicator;assembly=freeampcontrols"
+   
     x:Name="window" x:Class="FreeAmp.MainWindow"
         mc:Ignorable="d"
         Title="FreeAmp" Height="400" Width="600" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None" Loaded="Window_Loaded" >
-    <Grid x:Name="MainGrid" Background="#FF6E6E6E">
+    <Grid x:Name="MainGrid" Background="#FF6E6E6E" Margin="2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition/>
@@ -34,7 +36,14 @@
         <TrackBarControl:freeamp_TrackBar Grid.Column="1" HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="285" Value="3"/>
 
 
-        
+
+
+
+        <MinVolIndicator:MinVolIndicator HorizontalAlignment="Left" Margin="90,65,0,0" Grid.Row="1" VerticalAlignment="Top" Width="240" Height="20" Grid.ColumnSpan="2"
+                                         Grid.Column="0" />
+
+
+
 
 
     </Grid>
