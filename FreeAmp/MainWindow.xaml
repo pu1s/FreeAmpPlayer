@@ -33,14 +33,15 @@
         <Button x:Name="button1" Content="Button" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
 
 
-        <TrackBarControl:freeamp_TrackBar Grid.Column="1" HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="285" Value="3"/>
+        <TrackBarControl:freeamp_TrackBar HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="355" Value="3" Grid.ColumnSpan="2"/>
+        <MinVolIndicator:MinVolIndicator x:Name="ind" HorizontalAlignment="Left" Height="25" Margin="20,70,0,0" VerticalAlignment="Top" Width="320" Grid.ColumnSpan="2" X="0.1" Value="{Binding Value, ElementName=slider}"/>
+        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="20,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="320" Maximum="1" ValueChanged="slider_ValueChanged_1"/>
 
 
 
 
 
-        <MinVolIndicator:MinVolIndicator HorizontalAlignment="Left" Margin="90,65,0,0" Grid.Row="1" VerticalAlignment="Top" Width="240" Height="20" Grid.ColumnSpan="2"
-                                         Grid.Column="0" />
+
 
 
 

@@ -21,9 +21,17 @@
                 </Grid.RowDefinitions>
                 <Rectangle Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="1" Fill="Azure"/>
                 <Rectangle Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="2" Fill="Red"/>
-                <Rectangle x:Name="Indicator" x:FieldModifier="public" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Fill="{DynamicResource HighlightColorBrush}"/>
-                <Rectangle Grid.Row="0" Grid.RowSpan="3" Grid.Column="1"   Fill="Red"/>
-
+                <Rectangle x:Name="Indicator" x:FieldModifier="public" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Fill="{DynamicResource HighlightColorBrush}" RenderTransformOrigin="1,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="ScaleTransform" ScaleX="{Binding X, ElementName=freeamp_minvolctrl}"/>
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Fill="Red"/>
             </Grid>
         </AdornerDecorator>
     </Border>

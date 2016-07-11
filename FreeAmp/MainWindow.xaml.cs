@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using freeampcorelib;
@@ -38,9 +41,7 @@ namespace FreeAmp
             sp = new SoundPlayer();
             sp.TrackLoaded += Sp_TrackLoaded;
             timer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(1000)};
-            //timer.Tick += Timer_Tick;
-            //_trackList.AppendTrack(
-            //    new Track(@"E:\23_justin_timberlake_cant_stop_the_feeling_myzuka.fm.mp3"));
+            
         }
 
 
@@ -67,9 +68,7 @@ namespace FreeAmp
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            //sp.Load(_trackList.GetCurrentTrack());
-            //if(!timer.IsEnabled) timer.Start();
-            //sp.Play();
+           
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -123,5 +122,11 @@ namespace FreeAmp
         }
 
         #endregion
+
+        private void slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ind.Value = ((Slider) sender).Value;
+            
+        }
     }
 }

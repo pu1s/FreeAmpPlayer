@@ -1,28 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace freeampcontrols.Controls.MinVolIndicator
 {
     /// <summary>
-    /// Логика взаимодействия для MinVolIndicator.xaml
+    ///     Логика взаимодействия для MinVolIndicator.xaml
     /// </summary>
     public partial class MinVolIndicator : UserControl
     {
+        public static readonly DependencyProperty ValueProperty;
+
+        static MinVolIndicator()
+        {
+            ValueProperty = DependencyProperty.Register(
+                "Value", typeof (double), typeof (MinVolIndicator), new FrameworkPropertyMetadata(OnValueChanged), ValidateValueCallback);
+        }
+
+        private static bool ValidateValueCallback(object value)
+        {
+            return !((double)value< 0) || !((double) value >1);
+        }
+
         public MinVolIndicator()
         {
             InitializeComponent();
         }
+
+        public double X { get; set; }
+        /// <summary>
+        /// Свойство зависимостей
+        /// </summary>
+        public double Value
+        {
+            get { return (double) GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
+        }
+
+        private static void OnValueChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+        {
+            var obj = (MinVolIndicator) dependencyObject;
+            var arg = (double) args.NewValue;
+            obj.Value = arg;
+            obj.ScaleTransform.ScaleX = 1 - arg;
+        }
+
+       
     }
 }
