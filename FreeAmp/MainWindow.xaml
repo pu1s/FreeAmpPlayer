@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FreeAmp"
         xmlns:style="clr-namespace:FreeAmp"
-        xmlns:core="clr-namespace:FreeAmp.Core"
-        xmlns:sp="clr-namespace:FreeAmp"
+    xmlns:sp="clr-namespace:FreeAmp"
         xmlns:UIComponents="clr-namespace:FreeAmp.UIComponents" xmlns:freeampcontrols="clr-namespace:freeampcontrols;assembly=freeampcontrols"
    
     xmlns:TrackBarControl="clr-namespace:freeampcontrols.Controls.TrackBarControl;assembly=freeampcontrols"
@@ -34,8 +33,8 @@
 
 
         <TrackBarControl:freeamp_TrackBar HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="355" Value="3" Grid.ColumnSpan="2"/>
-        <MinVolIndicator:MinVolIndicator x:Name="ind" HorizontalAlignment="Left" Height="25" Margin="20,70,0,0" VerticalAlignment="Top" Width="320" Grid.ColumnSpan="2" X="0.1" Value="{Binding Value, ElementName=slider}"/>
-        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="20,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="320" Maximum="1" ValueChanged="slider_ValueChanged_1"/>
+        <MinVolIndicator:MinVolIndicator x:Name="ind" HorizontalAlignment="Left" Height="25" Margin="20,70,0,0" VerticalAlignment="Top" Width="320" Grid.ColumnSpan="2" X="0.1"/>
+        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="20,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="320" Maximum="1" ValueChanged="slider_ValueChanged"/>
 
 
 

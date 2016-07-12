@@ -1,38 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
-using NAudio.Gui;
+using NAudio.CoreAudioApi;
 using NAudio.Wave;
 
-namespace FreeAmp.Core
+namespace freeampcorelib
 {
+   
+
     public class SoundPlayer
     {
-       
-
         public SoundPlayer()
         {
+           
+            devices = new List<MMDevice>();
+            CoreAudio.GetMMDeviceCollection(out devices);
             DeviceWaveOut = new DirectSoundOut();
             DeviceWaveOut.PlaybackStopped += Out_PlaybackStopped;
+           
         }
 
-        public event EventHandler StartPlaying;
-        public event EventHandler StopPlaying;
-        public event EventHandler TrackLoaded;
-        private void Out_PlaybackStopped(object sender, StoppedEventArgs e)
-        {
-            Stop();
-        }
-
-        private BlockAlignReductionStream bstream { get; set; } = null;
-        private Mp3FileReader FileReader { get; set; } = null;
-        private DirectSoundOut DeviceWaveOut { get; set; } = null;
+        
+        private List<MMDevice> devices;
+       
+        public BlockAlignReductionStream bstream { get; set; }
+        public Mp3FileReader FileReader { get; set; }
+        public DirectSoundOut DeviceWaveOut { get; set; }
 
         public PlaybackState PlaybackState => DeviceWaveOut.PlaybackState;
-
+        public double fileVol => DeviceWaveOut.Volume;
         public double TrackTotalTime => FileReader.TotalTime.TotalSeconds;
 
         public double CurrentTrackTime
@@ -51,22 +46,35 @@ namespace FreeAmp.Core
 
         public int Channels => FileReader.Mp3WaveFormat.Channels;
 
+        public float PicVolume => devices[1].AudioMeterInformation.MasterPeakValue;
+
+        public event EventHandler StartPlaying;
+        public event EventHandler StopPlaying;
+        public event EventHandler TrackLoaded;
+
+        public void Out_PlaybackStopped(object sender, StoppedEventArgs e)
+        {
+            Stop();
+        }
+
         public void Pause()
         {
-            if (DeviceWaveOut == null || FileReader == null || DeviceWaveOut.PlaybackState != PlaybackState.Playing) return;
+            if (DeviceWaveOut == null || FileReader == null || DeviceWaveOut.PlaybackState != PlaybackState.Playing)
+                return;
             DeviceWaveOut.Pause();
             OnStopPlaying();
         }
 
         public void Play()
         {
-           
             DeviceWaveOut.Play();
             OnStartPlaying();
         }
+
         public void Resume()
         {
-            if (DeviceWaveOut == null || FileReader == null || DeviceWaveOut.PlaybackState != PlaybackState.Paused) return;
+            if (DeviceWaveOut == null || FileReader == null || DeviceWaveOut.PlaybackState != PlaybackState.Paused)
+                return;
             DeviceWaveOut.Play();
             OnStartPlaying();
         }
@@ -76,11 +84,10 @@ namespace FreeAmp.Core
             if (DeviceWaveOut == null || FileReader == null) return;
             DeviceWaveOut.Stop();
             OnStopPlaying();
-           DisposeDevice();
-           
+            DisposeDevice();
         }
 
-        private void DisposeDevice()
+        public void DisposeDevice()
         {
             if (DeviceWaveOut != null)
             {
@@ -95,38 +102,38 @@ namespace FreeAmp.Core
             bstream.Dispose();
             bstream = null;
         }
+
         public SoundPlayer Load(Track track)
         {
             DisposeDevice();
             if (track == null) return null;
-            
+
             DeviceWaveOut = new DirectSoundOut();
             FileReader = new Mp3FileReader(track.Path);
-           
-            WaveStream pcm = WaveFormatConversionStream.CreatePcmStream(FileReader);
+
+            var pcm = WaveFormatConversionStream.CreatePcmStream(FileReader);
             bstream = new BlockAlignReductionStream(pcm);
+          
             DeviceWaveOut.Init(bstream);
             OnTrackLoaded();
-            
+
+
             return this;
-            
         }
 
-        protected virtual void OnStartPlaying()
+        public virtual void OnStartPlaying()
         {
             StartPlaying?.Invoke(this, EventArgs.Empty);
         }
 
-        protected virtual void OnStopPlaying()
+        public virtual void OnStopPlaying()
         {
             StopPlaying?.Invoke(this, EventArgs.Empty);
         }
 
-        protected virtual void OnTrackLoaded()
+        public virtual void OnTrackLoaded()
         {
             TrackLoaded?.Invoke(this, EventArgs.Empty);
         }
     }
-
-
 }

@@ -1,4 +1,4 @@
-namespace FreeAmp.Core
+namespace freeampcorelib
 {
     /// <summary>
     /// Перечисление, тип повтора

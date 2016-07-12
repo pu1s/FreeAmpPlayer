@@ -69,7 +69,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\CoreAudio.cs" />
     <Compile Include="src\Obsolete.cs" />
+    <Compile Include="src\RepeatMode.cs" />
+    <Compile Include="src\SampleAggregator.cs" />
+    <Compile Include="src\SoundPlayer.cs" />
     <Compile Include="src\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\TrackList.cs" />
