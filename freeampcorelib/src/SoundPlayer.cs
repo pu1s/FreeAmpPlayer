@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Permissions;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 
 namespace freeampcorelib
 {
-    public class SoundPlayer
+    public class SoundPlayer 
     {
         private List<MMDevice> devices;
 
@@ -151,5 +152,19 @@ namespace freeampcorelib
         }
     }
 
-  
+    public interface ISoundPlayback : IDisposable
+    {
+        void Play();
+        void Pause();
+        void Stop();
+        void Next();
+        void Preview();
+        float Volume { get; set; }
+        float MasterVolume { get; set; }
+        RepeatMode RepeatMode { get; set; }
+        PlaybackState PlaybackState { get; set; }
+        event EventHandler StartPlaying;
+        event EventHandler StopPlaing;
+        Track Track { get; set; }
+    }
 }
