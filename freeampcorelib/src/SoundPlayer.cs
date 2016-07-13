@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 
@@ -11,11 +13,8 @@ namespace freeampcorelib
     {
         public SoundPlayer()
         {
-           
             devices = new List<MMDevice>();
             CoreAudio.GetMMDeviceCollection(out devices);
-            DeviceWaveOut = new DirectSoundOut();
-            DeviceWaveOut.PlaybackStopped += Out_PlaybackStopped;
            
         }
 
@@ -24,7 +23,7 @@ namespace freeampcorelib
        
         public BlockAlignReductionStream bstream { get; set; }
         public Mp3FileReader FileReader { get; set; }
-        public DirectSoundOut DeviceWaveOut { get; set; }
+        public WaveOut DeviceWaveOut { get; set; }
 
         public PlaybackState PlaybackState => DeviceWaveOut.PlaybackState;
         public double fileVol => DeviceWaveOut.Volume;
@@ -46,12 +45,33 @@ namespace freeampcorelib
 
         public int Channels => FileReader.Mp3WaveFormat.Channels;
 
-        public float PicVolume => devices[1].AudioMeterInformation.MasterPeakValue;
+        public float PicVolume => GetPicVolume(ref devices);
+
 
         public event EventHandler StartPlaying;
         public event EventHandler StopPlaying;
         public event EventHandler TrackLoaded;
 
+        private float GetPicVolume(ref List<MMDevice> devices)
+        {
+            if (devices == null)
+                return 0;
+            var picvolumes = new float[devices.Count];
+            for (int i = 0; i < picvolumes.Length; i++)
+            {
+                picvolumes[i] = devices[i].AudioMeterInformation.MasterPeakValue;
+            }
+            var maxpicvolume = new float();
+            foreach (var picvolume in picvolumes)
+            {
+                if (picvolume > maxpicvolume)
+                {
+                    maxpicvolume = picvolume;
+                }
+            }
+            Debug.WriteLine("maxPic  {0}", maxpicvolume);
+            return maxpicvolume;
+        }
         public void Out_PlaybackStopped(object sender, StoppedEventArgs e)
         {
             Stop();
@@ -95,6 +115,7 @@ namespace freeampcorelib
                     DeviceWaveOut.PlaybackState == PlaybackState.Paused)
                 {
                     DeviceWaveOut.Stop();
+                    DeviceWaveOut.PlaybackStopped -= Out_PlaybackStopped;
                     DeviceWaveOut = null;
                 }
             }
@@ -105,19 +126,18 @@ namespace freeampcorelib
 
         public SoundPlayer Load(Track track)
         {
-            DisposeDevice();
+            
             if (track == null) return null;
-
-            DeviceWaveOut = new DirectSoundOut();
+            if (DeviceWaveOut == null)
+            {
+                DeviceWaveOut = new WaveOut();
+                DeviceWaveOut.PlaybackStopped += Out_PlaybackStopped;
+            }
             FileReader = new Mp3FileReader(track.Path);
-
             var pcm = WaveFormatConversionStream.CreatePcmStream(FileReader);
             bstream = new BlockAlignReductionStream(pcm);
-          
             DeviceWaveOut.Init(bstream);
             OnTrackLoaded();
-
-
             return this;
         }
 
