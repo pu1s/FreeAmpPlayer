@@ -1,12 +1,13 @@
 namespace freeampcorelib
 {
     /// <summary>
-    /// Перечисление, тип повтора
+    /// Режим повтора
     /// </summary>
     public enum RepeatMode
     {
-        None,
-        Track,
-        All
+        Off,
+        OneTrack,
+        All,
+        Album
     };
 }

@@ -1,26 +1,22 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 
 namespace freeampcorelib
 {
-   
-
     public class SoundPlayer
     {
+        private List<MMDevice> devices;
+
         public SoundPlayer()
         {
             devices = new List<MMDevice>();
             CoreAudio.GetMMDeviceCollection(out devices);
-           
         }
 
-        
-        private List<MMDevice> devices;
-       
         public BlockAlignReductionStream bstream { get; set; }
         public Mp3FileReader FileReader { get; set; }
         public WaveOut DeviceWaveOut { get; set; }
@@ -57,7 +53,7 @@ namespace freeampcorelib
             if (devices == null)
                 return 0;
             var picvolumes = new float[devices.Count];
-            for (int i = 0; i < picvolumes.Length; i++)
+            for (var i = 0; i < picvolumes.Length; i++)
             {
                 picvolumes[i] = devices[i].AudioMeterInformation.MasterPeakValue;
             }
@@ -72,6 +68,7 @@ namespace freeampcorelib
             Debug.WriteLine("maxPic  {0}", maxpicvolume);
             return maxpicvolume;
         }
+
         public void Out_PlaybackStopped(object sender, StoppedEventArgs e)
         {
             Stop();
@@ -82,7 +79,6 @@ namespace freeampcorelib
             if (DeviceWaveOut == null || FileReader == null || DeviceWaveOut.PlaybackState != PlaybackState.Playing)
                 return;
             DeviceWaveOut.Pause();
-            OnStopPlaying();
         }
 
         public void Play()
@@ -104,7 +100,6 @@ namespace freeampcorelib
             if (DeviceWaveOut == null || FileReader == null) return;
             DeviceWaveOut.Stop();
             OnStopPlaying();
-            DisposeDevice();
         }
 
         public void DisposeDevice()
@@ -115,9 +110,9 @@ namespace freeampcorelib
                     DeviceWaveOut.PlaybackState == PlaybackState.Paused)
                 {
                     DeviceWaveOut.Stop();
-                    DeviceWaveOut.PlaybackStopped -= Out_PlaybackStopped;
-                    DeviceWaveOut = null;
                 }
+                DeviceWaveOut.PlaybackStopped -= Out_PlaybackStopped;
+                DeviceWaveOut = null;
             }
             if (bstream == null) return;
             bstream.Dispose();
@@ -126,7 +121,6 @@ namespace freeampcorelib
 
         public SoundPlayer Load(Track track)
         {
-            
             if (track == null) return null;
             if (DeviceWaveOut == null)
             {
@@ -156,4 +150,6 @@ namespace freeampcorelib
             TrackLoaded?.Invoke(this, EventArgs.Empty);
         }
     }
+
+  
 }

@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="src\CoreAudio.cs" />
     <Compile Include="src\Obsolete.cs" />
+    <Compile Include="src\PlaybackMode.cs" />
     <Compile Include="src\RepeatMode.cs" />
     <Compile Include="src\SampleAggregator.cs" />
     <Compile Include="src\SoundPlayer.cs" />
