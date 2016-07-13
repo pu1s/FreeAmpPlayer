@@ -8,14 +8,16 @@ namespace freeampcorelib
         void Play();
         void Pause();
         void Stop();
-        void Next();
-        void Preview();
         float Volume { get; set; }
         float MasterVolume { get; set; }
-        RepeatMode RepeatMode { get; set; }
-        PlaybackState PlaybackState { get; set; }
+        float VolumePick { get; }
+        int Channels { get; }
+        int Bitrate { get; }
+        long CurrentPosition { get; }
+        long LengthAudioData { get; }
         event EventHandler<SoundPlaybackEventArgs> StartPlaying;
-        event EventHandler<SoundPlaybackEventArgs> StopPlaing;
+        event EventHandler<SoundPlaybackEventArgs> StopPlaying;
+        event EventHandler<SoundPlaybackEventArgs> TrackLoaded;
         Track Track { get; set; }
     }
 }

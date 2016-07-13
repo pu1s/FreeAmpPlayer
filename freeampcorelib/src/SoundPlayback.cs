@@ -5,12 +5,33 @@ namespace freeampcorelib
 {
     public class SoundPlayback : ISoundPlayback
     {
+        internal WaveOut OutputDevice;
+        #region Ctors
+
+        public SoundPlayback()
+        {
+            OutputDevice = null;
+        }
+
+        #endregion
+
+        protected virtual void OnStartPlaying(SoundPlaybackEventArgs e)
+        {
+            StartPlaying?.Invoke(this, e);
+        }
 
         #region Methods
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (OutputDevice != null 
+                && OutputDevice.PlaybackState == PlaybackState.Paused 
+                && OutputDevice.PlaybackState == PlaybackState.Playing)
+            {
+                OutputDevice.Stop();
+                OutputDevice.Dispose();
+            }
+            OutputDevice = null;
         }
 
         public void Play()
@@ -25,17 +46,7 @@ namespace freeampcorelib
 
         public void Stop()
         {
-            throw new NotImplementedException();
-        }
-
-        public void Next()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Preview()
-        {
-            throw new NotImplementedException();
+            throw new NotFiniteNumberException();
         }
 
         #endregion
@@ -45,28 +56,30 @@ namespace freeampcorelib
         public Track Track { get; set; }
         public float Volume { get; set; }
         public float MasterVolume { get; set; }
-        public RepeatMode RepeatMode { get; set; }
-        public PlaybackState PlaybackState { get; set; }
+        public float VolumePick { get; }
+        public int Channels { get; }
+        public int Bitrate { get; }
+        public long CurrentPosition { get; }
+        public long LengthAudioData { get; }
 
         #endregion
 
         #region Events
 
         public event EventHandler<SoundPlaybackEventArgs> StartPlaying;
-        public event EventHandler<SoundPlaybackEventArgs> StopPlaing;
+        public event EventHandler<SoundPlaybackEventArgs> StopPlaying;
+        public event EventHandler<SoundPlaybackEventArgs> TrackLoaded;
 
         #endregion
-
     }
 
     public class SoundPlaybackEventArgs : EventArgs
     {
-        public string Message { get; set; }
-        public Track Track { get; private set; }
-        public SoundPlaybackEventArgs(string message, Track track)
+        public SoundPlaybackEventArgs(Track track)
         {
-            Message = message;
             Track = track;
         }
+
+        public Track Track { get; private set; }
     }
 }
