@@ -15,6 +15,8 @@
    
     xmlns:VolumeControl="clr-namespace:freeampcontrols.Controls.VolumeControl;assembly=freeampcontrols"
    
+    xmlns:SegmentIndicatorControl="clr-namespace:freeampcontrols.Controls.SegmentIndicatorControl;assembly=freeampcontrols"
+   
     x:Name="window" x:Class="FreeAmp.MainWindow"
         mc:Ignorable="d"
         Title="FreeAmp" Height="400" Width="600" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None" Loaded="Window_Loaded" >
@@ -29,12 +31,16 @@
         </Grid.RowDefinitions>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
         <Button x:Name="button1" Content="Button" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
+        <TrackBarControl:freeamp_TrackBar Grid.Column="1" HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="285" />
 
 
-        <TrackBarControl:freeamp_TrackBar Grid.Column="1" HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="285" Value="3"/>
 
 
-        
+
+        <SegmentIndicatorControl:freeamp_SegmentIndicator Grid.Column="1" HorizontalAlignment="Left" Margin="115,75,0,0" VerticalAlignment="Top" Width="60" Height="12"/>
+
+
+
 
 
     </Grid>

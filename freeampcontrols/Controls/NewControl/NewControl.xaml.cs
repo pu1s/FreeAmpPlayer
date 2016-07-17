@@ -47,10 +47,8 @@ namespace freeampcontrols.Controls.NewControl
 
         private static void OnChangeValue(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-            var obj = (NewControl) sender;
-            var obj1 = (double)args.NewValue;
-            obj.Value = obj1;
-            obj.Cont = obj1.ToString(CultureInfo.InvariantCulture);
+            ((NewControl) sender).Value = (double) args.NewValue;
+            ((NewControl) sender).Cont = args.NewValue.ToString();
         }
     }
 }
