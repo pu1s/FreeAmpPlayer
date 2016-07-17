@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FreeAmp"
         xmlns:style="clr-namespace:FreeAmp"
-        xmlns:core="clr-namespace:FreeAmp.Core"
-        xmlns:sp="clr-namespace:FreeAmp"
+    xmlns:sp="clr-namespace:FreeAmp"
         xmlns:UIComponents="clr-namespace:FreeAmp.UIComponents" xmlns:freeampcontrols="clr-namespace:freeampcontrols;assembly=freeampcontrols"
    
     xmlns:TrackBarControl="clr-namespace:freeampcontrols.Controls.TrackBarControl;assembly=freeampcontrols"
@@ -15,12 +14,12 @@
    
     xmlns:VolumeControl="clr-namespace:freeampcontrols.Controls.VolumeControl;assembly=freeampcontrols"
    
-    xmlns:SegmentIndicatorControl="clr-namespace:freeampcontrols.Controls.SegmentIndicatorControl;assembly=freeampcontrols"
+    xmlns:MinVolIndicator="clr-namespace:freeampcontrols.Controls.MinVolIndicator;assembly=freeampcontrols"
    
     x:Name="window" x:Class="FreeAmp.MainWindow"
         mc:Ignorable="d"
         Title="FreeAmp" Height="400" Width="600" Style="{DynamicResource DarkWindowStyle}" WindowStyle="None" Loaded="Window_Loaded" >
-    <Grid x:Name="MainGrid" Background="#FF6E6E6E">
+    <Grid x:Name="MainGrid" Background="#FF6E6E6E" Margin="2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition/>
@@ -31,13 +30,17 @@
         </Grid.RowDefinitions>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
         <Button x:Name="button1" Content="Button" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
-        <TrackBarControl:freeamp_TrackBar Grid.Column="1" HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="285" />
+
+
+        <TrackBarControl:freeamp_TrackBar HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="355" Value="3" Grid.ColumnSpan="2"/>
+        <MinVolIndicator:MinVolIndicator x:Name="ind" HorizontalAlignment="Left" Height="25" Margin="20,70,0,0" VerticalAlignment="Top" Width="320" Grid.ColumnSpan="2" X="0.1"/>
+        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="20,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="320" Maximum="1" ValueChanged="slider_ValueChanged"/>
 
 
 
 
 
-        <SegmentIndicatorControl:freeamp_SegmentIndicator Grid.Column="1" HorizontalAlignment="Left" Margin="115,75,0,0" VerticalAlignment="Top" Width="60" Height="12"/>
+
 
 
 

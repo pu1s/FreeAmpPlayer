@@ -8,16 +8,20 @@
              d:DesignHeight="30" d:DesignWidth="300">
     <Border>
         <Grid x:Name="PART_Main">
-
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Content="L" FontSize="10" FontWeight="Bold" FontFamily="Segoe UI Black" Foreground="#FF20A80A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-
+            <Grid x:Name="PART_Indicator" Grid.Row="0" Grid.Column="1"/>
+            
         </Grid>
     </Border>
-
-
+    <UserControl.Resources>
+        <ResourceDictionary Source="../../Themes/Generic.xaml"/>
+    </UserControl.Resources>
 </UserControl>
-

@@ -111,11 +111,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Core\CoreAudio.cs" />
-    <Compile Include="Core\RepeatMode.cs" />
-    <Compile Include="Core\SoundPlayer.cs" />
-    <Compile Include="Core\TrackInfo.cs" />
-    <Compile Include="Core\Track.cs" />
     <Compile Include="UIComponents\MainMenuButton.xaml.cs">
       <DependentUpon>MainMenuButton.xaml</DependentUpon>
     </Compile>
@@ -220,6 +215,9 @@
       <Project>{8ecc9b82-4985-4c85-849c-ef937312e03b}</Project>
       <Name>freeampcorelib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

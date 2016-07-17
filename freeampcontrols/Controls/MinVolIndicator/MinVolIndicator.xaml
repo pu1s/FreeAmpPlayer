@@ -1,0 +1,42 @@
+﻿<UserControl x:Name="freeamp_minvolctrl" x:Class="freeampcontrols.Controls.MinVolIndicator.MinVolIndicator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:freeampcontrols.Controls.MinVolIndicator"
+             mc:Ignorable="d" 
+             d:DesignHeight="10" d:DesignWidth="60">
+    <Border BorderThickness="1"  SnapsToDevicePixels="True" Background="{DynamicResource WindowBackgroundColorBrush}">
+        <AdornerDecorator>
+            <Grid x:Name="PART_Indicator">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Rectangle Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="1" Fill="Azure"/>
+                <Rectangle Grid.Row="1" Grid.Column="1"  Grid.ColumnSpan="2" Fill="Red"/>
+                <Rectangle x:Name="Indicator" x:FieldModifier="public" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Fill="{DynamicResource HighlightColorBrush}" RenderTransformOrigin="1,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="ScaleTransform" ScaleX="{Binding X, ElementName=freeamp_minvolctrl}"/>
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Fill="Red"/>
+            </Grid>
+        </AdornerDecorator>
+    </Border>
+    <UserControl.Resources>
+
+
+    </UserControl.Resources>
+</UserControl>

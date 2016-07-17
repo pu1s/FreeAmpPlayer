@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using freeampcorelib;
-using FreeAmp.Core;
 using Microsoft.Win32;
-using Track = freeampcorelib.Track;
+using NAudio.CoreAudioApi;
 
 namespace FreeAmp
 {
@@ -14,8 +16,9 @@ namespace FreeAmp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DispatcherTimer timer;
         private readonly TrackList tl = new TrackList();
+        private readonly DispatcherTimer timer;
+        private List<MMDevice> devices; 
 
         public MainWindow()
         {
@@ -34,42 +37,38 @@ namespace FreeAmp
                 null));
 
             #endregion
-
+           
             sp = new SoundPlayer();
-            sp.TrackLoaded += Sp_TrackLoaded;
-            timer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(1000)};
-            //timer.Tick += Timer_Tick;
-            //_trackList.AppendTrack(
-            //    new Track(@"E:\23_justin_timberlake_cant_stop_the_feeling_myzuka.fm.mp3"));
+            sp.TrackLoaded += Sp_TrackLoaded1;
+            timer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(16)};
+            timer.Tick += Timer_Tick;
         }
-
 
         public SoundPlayer sp { get; set; }
 
 
-        private void Sp_TrackLoaded(object sender, EventArgs e)
+        private void Sp_TrackLoaded1(object sender, EventArgs e)
         {
-            //slider.Maximum = sp.TrackTotalTime;
+            Debug.WriteLine("Track loaded");
+            Debug.WriteLine(ind.Value);
         }
+
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            //slider.Value = sp.CurrentTrackTime;
+           
+            ind.Value = sp.PicVolume*0.8d;
+
         }
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // Загрузите данные, установив свойство CollectionViewSource.Source:
-            // trackListViewSource.Source = [универсальный источник данных]
         }
 
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            //sp.Load(_trackList.GetCurrentTrack());
-            //if(!timer.IsEnabled) timer.Start();
-            //sp.Play();
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -78,11 +77,10 @@ namespace FreeAmp
             ofd.Multiselect = true;
             ofd.ShowDialog(this);
             tl.Items.Add(new Track(ofd.FileName));
-        }
-
-        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            //sp.CurrentTrackTime = slider.Value;
+            sp.Load(tl.GetCurrentTrack());
+            timer.Start();
+            sp.Play();
+          
         }
 
         #region CommandWindow
@@ -123,5 +121,10 @@ namespace FreeAmp
         }
 
         #endregion
+
+        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            sp.DeviceWaveOut.Volume = (float)((Slider) sender).Value;
+        }
     }
 }
