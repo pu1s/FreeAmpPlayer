@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace freeampcontrols.Controls.SegmentIndicatorControl
 {
@@ -20,7 +21,7 @@ namespace freeampcontrols.Controls.SegmentIndicatorControl
             InitializeComponent();
         }
 
-
+        public Color EmptySegmentColor { get; set; }
         public bool SegmentState
         {
             get { return (bool) GetValue(SegmentStateProperty); }
@@ -38,13 +39,23 @@ namespace freeampcontrols.Controls.SegmentIndicatorControl
 
         private static void OnSignalChange(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
-            ((freeamp_SegmentIndicator) dependencyObject).IsSignal = (bool) args.NewValue;
+            var obj = dependencyObject as freeamp_SegmentIndicator;
+            var arg = (bool)args.NewValue;
+            if (obj == null) return;
+            obj.Signal = arg;
+            obj.IsSignal = arg;
         }
 
         private static void OnSegmentStateChanged(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs args)
         {
-            ((freeamp_SegmentIndicator) dependencyObject).SegmentState = (bool) args.NewValue;
+            var obj = dependencyObject as freeamp_SegmentIndicator;
+            var arg = (bool) args.NewValue;
+            obj.SegmentState = arg;
+            obj.IsSegmentState = arg;
+
         }
+
+       
     }
 }

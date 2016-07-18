@@ -66,6 +66,7 @@
     <Compile Include="Controls\VolumIndicator\freeamp_VolumeIndicatorControl.xaml.cs">
       <DependentUpon>freeamp_VolumeIndicatorControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\VolumIndicator\Volumeter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
