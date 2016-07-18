@@ -76,6 +76,7 @@
     <Compile Include="src\RepeatMode.cs" />
     <Compile Include="src\SampleAggregator.cs" />
     <Compile Include="src\SoundPlayback.cs" />
+    <Compile Include="src\SoundPlaybackEventArgs.cs" />
     <Compile Include="src\SoundPlayer.cs" />
     <Compile Include="src\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

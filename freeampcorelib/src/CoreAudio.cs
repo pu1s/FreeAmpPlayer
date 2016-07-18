@@ -30,6 +30,18 @@ namespace freeampcorelib
 #endif
         }
 
+        /// <summary>
+        /// Возвращает список активных аудиоустройств в системе
+        /// </summary>
+        /// <returns>
+        /// Коллекция устройств вывода звука
+        /// </returns>
+        public static MMDeviceCollection GetMmDeviceCollection()
+        {
+            var enumerator = new MMDeviceEnumerator();
+            return enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
+        }
+
        
 
     }
