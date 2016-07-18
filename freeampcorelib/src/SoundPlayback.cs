@@ -8,12 +8,14 @@ namespace freeampcorelib
     {
         internal WaveOut OutputDevice;
         internal WaveFormat OutputWaveFormat;
+        internal Mp3FileReader FileReader;
         #region Ctors
 
         public SoundPlayback()
         {
             OutputDevice = null;
             OutputWaveFormat = null;
+            FileReader = null;
         }
 
         #endregion
@@ -47,20 +49,12 @@ namespace freeampcorelib
         public void Play()
         {
             if (Track == null) throw new SoundPlaybackException(nameof(Track));
-
             if (!File.Exists(Track.Path)) throw new FileNotFoundException(nameof(Track.Path));
             OutputDevice = new WaveOut();
-            
             //TODO: определить фильтр файлов по расширению
-
-            var fileStream = new Mp3FileReader(Track.Path);
-            LengthAudioData = fileStream.Length;
-            Channels = fileStream.WaveFormat.Channels;
-            Bitrate = fileStream.WaveFormat.AverageBytesPerSecond;
-            CurrentPosition = fileStream.Position;
-            var pcm = WaveFormatConversionStream.CreatePcmStream(fileStream);
-            //TODO: +++++++++++++++++++++++++++++++++++++++
-            OutputWaveFormat = pcm;
+            FileReader = new Mp3FileReader(Track.Path);
+            var pcm = WaveFormatConversionStream.CreatePcmStream(FileReader);
+            OutputWaveFormat = pcm.WaveFormat;
             OutputDevice.Init(pcm);
             OnTrackLoaded(new SoundPlaybackEventArgs(Track));
             OutputDevice.Play();
@@ -88,13 +82,40 @@ namespace freeampcorelib
         #region Property
 
         public Track Track { get; set; }
-        public float Volume { get; set; }
+        public float Volume
+        {
+            get
+            {
+                return OutputDevice?.Volume ?? 0;
+            }
+            set
+            {
+                if(OutputDevice == null) return;
+                if(value>1 && value<0) throw new ArgumentOutOfRangeException(nameof(value));
+                OutputDevice.Volume = value;
+            }
+        }
         public float MasterVolume { get; set; }
-        public float VolumePick { get; }
-        public int Channels { get; private set; }
-        public int Bitrate { get; private set; }
-        public long CurrentPosition { get; private set; }
-        public long LengthAudioData { get; private set; }
+
+        public float VolumePick
+        {
+            get
+            {
+                if (OutputDevice == null)
+                {
+                    return 0;
+                }
+                return OutputDevice.Volume;
+            }
+        }
+
+        public int Channels => FileReader.WaveFormat?.Channels ?? 0;
+
+        public int Bitrate => FileReader?.WaveFormat.SampleRate ?? 0;
+
+        public long CurrentPosition => OutputDevice?.GetPosition() ?? 0;
+
+        public long LengthAudioData => FileReader?.Length ?? 0;
 
         #endregion
 
