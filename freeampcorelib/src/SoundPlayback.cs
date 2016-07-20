@@ -60,6 +60,7 @@ namespace freeampcorelib
             OutputDevice.Play();
             OnStartPlaying(new SoundPlaybackEventArgs(Track));
             OutputDevice.PlaybackStopped += OutputDevice_PlaybackStopped;
+            
         }
 
         private void OutputDevice_PlaybackStopped(object sender, StoppedEventArgs e)
