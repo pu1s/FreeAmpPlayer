@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\CoreAudio.cs" />
-    <Compile Include="src\FreeAmpAudioRenderDevice\FreeAmpAudioRendeerDevice.cs" />
+    <Compile Include="src\FreeAmpAudioRenderDevice\FreeAmpAudioRenderDevice.cs" />
     <Compile Include="src\ISoundPlayback.cs" />
     <Compile Include="src\Obsolete.cs" />
     <Compile Include="src\PlaybackMode.cs" />
