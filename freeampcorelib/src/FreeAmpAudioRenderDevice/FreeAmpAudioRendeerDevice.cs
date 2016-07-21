@@ -1,70 +1,101 @@
 ﻿using System;
-using System.Runtime.InteropServices;
+using System.Linq;
 using NAudio.Wave;
 
 namespace freeampcorelib.FreeAmpAudioRenderDevice
 {
-    public interface IFreeAmpAudioRenderDevice
+    public class FreeAmpOutDevice<T> : IDisposable where T : IWavePlayer, new()
     {
-        void Init(IWaveProvider waveProvider);
-        void Play();
-        void Pause();
-        void Resume();
-        void Stop();
-        long GetPosition();
-        void Dispose();
-        PlaybackState PlaybackState { get; }
-        float Volume { get; set; }
-        event EventHandler<StoppedEventArgs> PlaybackStopped;
-    }
+        private T outDevice;
 
-    public class FAWO : WaveOut, IFreeAmpAudioRenderDevice
-    {
-        public FAWO()
+        public PlaybackState PlaybackState => outDevice?.PlaybackState ?? 0;
+
+        public bool IsAviable => GetDeviceAviable();
+
+        private bool GetDeviceAviable()
         {
-            
+            if (outDevice is WaveOut)
+            {
+                return WaveOut.DeviceCount > 0;
+            }
+            if (outDevice is DirectSoundOut)
+            {
+                return DirectSoundOut.Devices.Any();
+            }
+            if (outDevice is AsioOut)
+            {
+                return AsioOut.isSupported();
+            }
+            if (outDevice is WasapiOut)
+            {
+                return Environment.OSVersion.Version.Major > 6;
+            }
+            return false;
         }
 
-        public FAWO(WaveCallbackInfo callbackInfo) : base(callbackInfo)
+        public FreeAmpOutDevice<T> Create()
         {
-           
+            outDevice = new T();
+            outDevice.PlaybackStopped += OutDevice_PlaybackStopped;
+            return this;
         }
 
-        public FAWO(IntPtr windowHandle) : base(windowHandle)
+        private void OutDevice_PlaybackStopped(object sender, StoppedEventArgs e)
         {
+            throw new NotImplementedException();
         }
 
-        public new void Play()
+        public void Init(IWaveProvider waveProvider)
         {
-            base.Play();
+            outDevice.Init(waveProvider);
         }
-    }
-    public class FAOutDev<T> where T : IFreeAmpAudioRenderDevice, new ()
-    {
-        private T device = new T();
-
-        public float Vol => device?.Volume ?? 0;
-
-        public float Pos => device?.GetPosition() ?? 0;
-
-        public PlaybackState PlaybackState => device?.PlaybackState ?? 0;
 
         public void Play()
         {
-            device.Play();
+            outDevice.Play();
         }
-       
-    }
 
-    class MyClass
-    {
-         FAOutDev<FAWO> a = new FAOutDev<FAWO>();
+        #region IDisposable Support
 
-        private MyClass()
+        private bool disposedValue; // Для определения избыточных вызовов
+
+        protected void Dispose(bool disposing)
         {
-            a.Play();
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: освободить управляемое состояние (управляемые объекты).
+                    outDevice.PlaybackStopped -= OutDevice_PlaybackStopped;
+                    outDevice.Dispose();
+                }
+
+                // TODO: освободить неуправляемые ресурсы (неуправляемые объекты) и переопределить ниже метод завершения.
+                // TODO: задать большим полям значение NULL.
+                outDevice = default(T);
+                disposedValue = true;
+            }
         }
-       
+
+        // TODO: переопределить метод завершения, только если Dispose(bool disposing) выше включает код для освобождения неуправляемых ресурсов.
+        ~FreeAmpOutDevice()
+        {
+            // Не изменяйте этот код. Разместите код очистки выше, в методе Dispose(bool disposing).
+            Dispose(false);
+        }
+
+        // Этот код добавлен для правильной реализации шаблона высвобождаемого класса.
+        public void Dispose()
+        {
+            // Не изменяйте этот код. Разместите код очистки выше, в методе Dispose(bool disposing).
+            Dispose(true);
+            // TODO: раскомментировать следующую строку, если метод завершения переопределен выше.
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
-    
+
+
+
 }
