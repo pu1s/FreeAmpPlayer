@@ -50,7 +50,7 @@ namespace freeampcorelib
         {
             if (Track == null) throw new SoundPlaybackException(nameof(Track));
             if (!File.Exists(Track.Path)) throw new FileNotFoundException(nameof(Track.Path));
-            OutputDevice = new WaveOut();
+            OutputDevice. = new WaveOut();
             //TODO: определить фильтр файлов по расширению
             FileReader = new Mp3FileReader(Track.Path);
             var pcm = WaveFormatConversionStream.CreatePcmStream(FileReader);
